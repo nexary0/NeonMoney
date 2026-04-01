@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History — NeonMoney 💸</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="NeonMoney Logo"
+                    style="height: 36px; width: auto; margin-right: 8px; border-radius: 8px;">
+                Neon<span class="accent">Money</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-user-menu" style="display:flex; gap:8px; align-items:center;">
+                    <button class="btn btn-secondary btn-sm btn-logout" id="logout-btn">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout" style="padding-top: 100px;">
+
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-link"><span class="sidebar-icon">🏠</span> Dashboard</a>
+            <a href="rewards.html" class="sidebar-link"><span class="sidebar-icon">💰</span> My Coins</a>
+            <a href="rewards.html" class="sidebar-link"><span class="sidebar-icon">🎁</span> Rewards</a>
+            <a href="deals.html" class="sidebar-link"><span class="sidebar-icon">🔥</span> Deals</a>
+
+            <div class="sidebar-section-label">Activity</div>
+            <a href="alerts.html" class="sidebar-link"><span class="sidebar-icon">🔔</span> Alerts <span
+                    class="sidebar-badge">3</span></a>
+            <a href="history.html" class="sidebar-link active"><span class="sidebar-icon">📋</span> History</a>
+            <a href="wishlist.html" class="sidebar-link"><span class="sidebar-icon">⭐</span> Wishlist</a>
+
+            <div class="sidebar-section-label">Account</div>
+            <a href="profile.html" class="sidebar-link"><span class="sidebar-icon">👤</span> Profile</a>
+            <a href="faq.html" class="sidebar-link"><span class="sidebar-icon">❓</span> Help</a>
+            <button class="sidebar-link btn-logout" id="sidebar-logout-btn"
+                style="background:none;border:none;cursor:pointer;color:var(--text-muted);text-align:left;width:100%;"><span
+                    class="sidebar-icon">🚪</span> Logout</button>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h2>Transaction <span class="gradient-text">History</span></h2>
+                <p>A complete log of your purchases, subscriptions, and coin rewards.</p>
+            </div>
+
+            <div class="glass-card" style="padding:28px;">
+                <div style="display:flex; flex-direction:column; gap:16px;">
+
+                    <div class="alert-box" style="border-color: var(--border);">
+                        <span style="font-size:1.5rem;">🛍️</span>
+                        <div style="flex: 1;">
+                            <div style="font-weight:600; color:var(--text-primary);">Premium Subscription (1 Month)
+                            </div>
+                            <div style="font-size:0.85rem; color:var(--text-secondary);">Invoice #INV-2026-001 • Paid
+                                via UPI</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="color: var(--neon-red); font-weight: bold;">-₹199.00</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">March 24, 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="alert-box" style="border-color: var(--border);">
+                        <span style="font-size:1.5rem;">💰</span>
+                        <div style="flex: 1;">
+                            <div style="font-weight:600; color:var(--text-primary);">Flipkart Purchase Reward</div>
+                            <div style="font-size:0.85rem; color:var(--text-secondary);">Cashback for Sony Headphones
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="color: var(--neon-green); font-weight: bold;">+120 Coins</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">March 20, 2026</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNXh2aPjvZcWceDxCuMNzJegJ3RKwNsx0",
+            authDomain: "neonmoney-a2d18.firebaseapp.com",
+            projectId: "neonmoney-a2d18",
+            storageBucket: "neonmoney-a2d18.firebasestorage.app",
+            messagingSenderId: "759618988071",
+            appId: "1:759618988071:web:b65d190a3a7ececabc4602"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // Fetch LIVE Coin Balance for the Navbar
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                const navCoinDisplay = document.getElementById('nav-coins-val');
+
+                let currentCoins = 0;
+                if (userSnap.exists()) {
+                    currentCoins = userSnap.data().coins;
+                } else {
+                    currentCoins = parseInt(localStorage.getItem('neon_coins')) || 0;
+                }
+
+                if (navCoinDisplay) navCoinDisplay.textContent = currentCoins.toLocaleString('en-IN');
+            } else {
+                window.location.href = 'login.html'; // Protect the page
+            }
+        });
+
+        // Logout logic
+        const logoutBtns = document.querySelectorAll('.btn-logout');
+        logoutBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                signOut(auth).then(() => {
+                    window.location.href = 'login.html';
+                });
+            });
+        });
+    </script>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

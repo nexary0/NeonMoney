@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer — NeonMoney</title>
+    <meta name="description"
+        content="NeonMoney affiliate disclaimer. We earn commissions through affiliate links to Amazon and Flipkart.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .legal-hero {
+            padding: calc(var(--nav-height) + 60px) 0 60px;
+            text-align: center;
+        }
+
+        .legal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.25);
+            border-radius: 100px;
+            padding: 6px 18px;
+            margin-bottom: 20px;
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: #FF6B6B;
+        }
+
+        .legal-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            margin-bottom: 14px;
+        }
+
+        .legal-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .legal-body {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+        }
+
+        .big-disclaimer {
+            background: rgba(255, 107, 107, 0.07);
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: var(--radius-xl);
+            padding: 36px 40px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .big-disclaimer .disc-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .big-disclaimer h2 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: #FF6B6B;
+            margin-bottom: 16px;
+            letter-spacing: 0.06em;
+        }
+
+        .big-disclaimer p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        .legal-section {
+            margin-bottom: 44px;
+        }
+
+        .legal-section h2 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.06em;
+            color: #FF6B6B;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 107, 107, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legal-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+
+        .legal-section ul {
+            padding-left: 22px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .legal-section li {
+            margin-bottom: 8px;
+        }
+
+        .info-box {
+            background: rgba(0, 255, 178, 0.06);
+            border: 1px solid rgba(0, 255, 178, 0.2);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--text-primary) !important;
+        }
+
+        .affiliate-logos {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .aff-logo {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 16px 28px;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        .aff-logo.amazon {
+            color: #FF9900;
+            border-color: rgba(255, 153, 0, 0.2);
+        }
+
+        .aff-logo.flipkart {
+            color: #2874F0;
+            border-color: rgba(40, 116, 240, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-auth-links" style="display:flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+                </div>
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="legal-hero">
+        <div class="container">
+            <div class="legal-badge">⚠️ DISCLAIMER</div>
+            <h1 class="gradient-text">Affiliate Disclaimer</h1>
+            <p class="legal-meta">Last updated: January 1, 2025 &nbsp;·&nbsp; Please read before using our links</p>
+        </div>
+    </div>
+
+    <div class="legal-body">
+
+        <div class="big-disclaimer animate-on-scroll">
+            <div class="disc-icon">⚠️</div>
+            <h2>THE CORE DISCLAIMER</h2>
+            <p>NeonMoney is an independent price comparison and affiliate platform. <strong>We are NOT directly
+                    affiliated with, endorsed by, or officially partnered with Amazon or Flipkart.</strong> We earn a
+                small commission when you purchase through our affiliate links — at absolutely no extra cost to you.</p>
+        </div>
+
+        <div class="legal-section animate-on-scroll">
+            <h2>What Is Affiliate Marketing?</h2>
+            <p>Affiliate marketing is a way for websites like ours to earn a small referral fee from retailers. Here's
+                how it works:</p>
+            <ul>
+                <li>You see a product on NeonMoney and click the link to Amazon or Flipkart</li>
+                <li>You make a purchase on that retailer's website</li>
+                <li>The retailer pays us a small commission (typically 1%–8% depending on the product category)</li>
+                <li>You pay the same price you would pay if you went directly to the retailer — <strong>no markup, no
+                        extra cost to you</strong></li>
+            </ul>
+            <div class="info-box">
+                <p>✅ <strong>The price you pay is always the same.</strong> Our affiliate commission comes from the
+                    retailer's marketing budget — not from your pocket. Using our links is a free way to support
+                    NeonMoney while paying exactly what you'd pay anyway.</p>
+            </div>
+        </div>
+
+        <div class="legal-section animate-on-scroll">
+            <h2>Our Affiliate Programs</h2>
+            <p>NeonMoney participates in the following affiliate programs:</p>
+            <div class="affiliate-logos">
+                <div class="aff-logo amazon">🛒 Amazon Associates</div>
+                <div class="aff-logo flipkart">🛍️ Flipkart Affiliate</div>
+            </div>
+            <p>These programs are operated by their respective companies. NeonMoney is an independent publisher, not an
+                employee or official representative of either Amazon or Flipkart.</p>
+        </div>
+
+        <div class="legal-section animate-on-scroll">
+            <h2>Price Accuracy Disclaimer</h2>
+            <p>We make every effort to display accurate, up-to-date prices. However:</p>
+            <ul>
+                <li>Prices on e-commerce platforms change frequently — sometimes by the hour</li>
+                <li>Prices shown on NeonMoney may be delayed or temporarily inaccurate</li>
+                <li>Sale prices and deals may expire before we can update our listings</li>
+                <li><strong>Always verify the final price on the retailer's website before completing your
+                        purchase</strong></li>
+            </ul>
+            <p>NeonMoney is not responsible for any price discrepancies between what is shown on our platform and what
+                is displayed on the retailer's website at the time of purchase.</p>
+        </div>
+
+        <div class="legal-section animate-on-scroll">
+            <h2>Product Recommendations</h2>
+            <p>Product recommendations and "trending deals" on NeonMoney are based on:</p>
+            <ul>
+                <li>Price savings percentage compared to historical prices</li>
+                <li>User interest and search trends on our platform</li>
+                <li>Available affiliate commission rates</li>
+            </ul>
+            <p>We do not guarantee the quality, safety, or suitability of any product listed on our platform. Product
+                reviews and ratings (where shown) are sourced from the respective retailer platforms. For product
+                warranty, quality, or authenticity concerns — please contact the retailer directly.</p>
+        </div>
+
+        <div class="legal-section animate-on-scroll">
+            <h2>No Endorsement</h2>
+            <p>The presence of a product or link on NeonMoney does not imply our endorsement of that product or the
+                seller. We are a neutral comparison platform.</p>
+            <p>Brand names, trademarks, logos, and product images belong to their respective owners. NeonMoney uses
+                these only for descriptive purposes in accordance with fair use principles.</p>
+        </div>
+
+        <div class="legal-section animate-on-scroll">
+            <h2>Coin Rewards Disclaimer</h2>
+            <p>Our coin rewards system is funded through affiliate commissions. Please note:</p>
+            <ul>
+                <li>Coin rewards are not guaranteed and depend on successful purchase tracking</li>
+                <li>Ad blockers or browser privacy settings may prevent proper affiliate tracking, which could result in
+                    coins not being credited</li>
+                <li>NeonMoney reserves the right to modify, suspend, or discontinue the coin program at any time</li>
+                <li>Coins have no cash value outside the NeonMoney rewards ecosystem</li>
+            </ul>
+        </div>
+
+        <div class="legal-section animate-on-scroll">
+            <h2>Contact &amp; Questions</h2>
+            <p>If you have questions about this disclaimer or our affiliate relationships:</p>
+            <ul>
+                <li>📧 <a href="mailto:info@neonmoney.in" style="color:var(--neon-green);">info@neonmoney.in</a></li>
+                <li>📝 <a href="contact.html" style="color:var(--neon-green);">Contact Form</a></li>
+            </ul>
+            <p>We believe in full transparency. If you ever have a question about why a particular product or deal is
+                featured, don't hesitate to ask.</p>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo" style="margin-bottom:12px; display:inline-flex;">
+                        <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+                    </a>
+                    <p>We help users save money by finding the best deals and rewarding them with coins for smart
+                        shopping.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4><a href="deals.html">All Deals</a><a href="store.html">Stores</a><a
+                        href="rewards.html">Rewards</a><a href="dashboard.html">Dashboard</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a
+                        href="about.html">About Us</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &
+                        Conditions</a><a href="disclaimer.html" style="color:#FF6B6B;">Disclaimer</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 NeonMoney. All rights reserved.</p>
+                <p>We earn through affiliate links. <a href="disclaimer.html"
+                        style="color:var(--neon-green);text-decoration:none;">Read Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

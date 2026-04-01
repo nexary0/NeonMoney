@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Stores | NeonMoney</title>
+    <meta name="description"
+        content="Shop at Amazon, Flipkart, Meesho, Nykaa, 1mg, and 50+ top stores. Earn coins on every purchase.">
+
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        .store-hero {
+            padding: calc(var(--nav-height) + 60px) 0 40px;
+            text-align: center;
+        }
+
+        .store-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin-bottom: 14px;
+        }
+
+        .store-hero p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .store-directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 24px;
+            padding-bottom: 80px;
+            margin-top: 20px;
+        }
+
+        .app-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .app-card:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 178, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .app-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .app-name {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .app-cat {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .app-reward {
+            background: rgba(0, 255, 178, 0.1);
+            color: var(--neon-green);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        /* FILTER TABS STYLING */
+        .filter-tabs {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 10px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: rgba(0, 255, 178, 0.15);
+            border-color: rgba(0, 255, 178, 0.4);
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+
+            <a href="index.html" class="nav-logo"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                <img src="logo.png" alt="" style="height: 36px; width: 36px; border-radius: 8px; object-fit: cover;">
+                <span
+                    style="color: #fff; font-weight: bold; font-size: 1.4rem; font-family: var(--font-display, sans-serif);">Neon<span
+                        style="color: var(--neon-green);">Money</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html" class="active">Stores</a> <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+
+                <div id="nav-auth-links" style="display:flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+                </div>
+
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="store-hero">
+        <div class="container">
+            <h1 class="gradient-text animate-on-scroll">Shop at 50+ Top Stores</h1>
+            <p class="animate-on-scroll">Click any store below to start shopping. You can buy <b>anything</b> and you
+                will automatically earn coins in your NeonMoney account!</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="search-container" style="max-width: 600px; margin: 0 auto 30px auto; padding: 0 20px;">
+            <div style="position: relative;">
+                <span
+                    style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;">🔍</span>
+                <input type="text" id="store-search"
+                    placeholder="Search for stores (e.g., Myntra, Amazon) or categories..."
+                    style="width: 100%; padding: 15px 15px 15px 45px; border-radius: 12px; border: 1px solid #333; background: #1a1a2e; color: #fff; font-size: 1rem; outline: none; transition: border-color 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+            </div>
+        </div>
+
+        <div class="filter-tabs animate-on-scroll">
+            <button class="filter-btn active" onclick="filterStore('all', this)">All Deals</button>
+            <button class="filter-btn" onclick="filterStore('shopping', this)">🛍️ Shopping</button>
+            <button class="filter-btn" onclick="filterStore('finance', this)">💳 Finance</button>
+            <button class="filter-btn" onclick="filterStore('education', this)">🎓 Education</button>
+        </div>
+
+        <div class="store-directory-grid">
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🛒</div>
+                <h3 class="app-name">Amazon</h3>
+                <div class="app-cat">Everything</div>
+                <div class="app-reward">Up to 50 Coins</div>
+                <a href="https://www.amazon.in" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🛍️</div>
+                <h3 class="app-name">Flipkart</h3>
+                <div class="app-cat">Everything</div>
+                <div class="app-reward">Up to 50 Coins</div>
+                <a href="https://www.flipkart.com" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">👗</div>
+                <h3 class="app-name">Myntra</h3>
+                <div class="app-cat">Fashion</div>
+                <div class="app-reward">Up to 60 Coins</div>
+                <a href="https://myntr.it/48cZW9v" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🕶️</div>
+                <h3 class="app-name">AJIO</h3>
+                <div class="app-cat">Fashion</div>
+                <div class="app-reward">Up to 70 Coins</div>
+                <a href="https://ajiio.in/Tuazae6" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">💎</div>
+                <h3 class="app-name">Tata CLiQ</h3>
+                <div class="app-cat">Everything</div>
+                <div class="app-reward">Up to 60 Coins</div>
+                <a href="https://bitli.in/258R7dn" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🛍️</div>
+                <h3 class="app-name">Shopsy</h3>
+                <div class="app-cat">Everything</div>
+                <div class="app-reward">Up to 40 Coins</div>
+                <a href="https://bitli.in/71y9MpN" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">⚽</div>
+                <h3 class="app-name">Decathlon</h3>
+                <div class="app-cat">Sports</div>
+                <div class="app-reward">Up to 50 Coins</div>
+                <a href="https://bitli.in/whltQo1" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">👟</div>
+                <h3 class="app-name">Puma</h3>
+                <div class="app-cat">Sports & Shoes</div>
+                <div class="app-reward">Up to 60 Coins</div>
+                <a href="https://bitli.in/8ePegkg" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">👙</div>
+                <h3 class="app-name">Clovia</h3>
+                <div class="app-cat">Lingerie</div>
+                <div class="app-reward">Up to 80 Coins</div>
+                <a href="https://bitli.in/EOZ2wtl" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🩲</div>
+                <h3 class="app-name">XYXX</h3>
+                <div class="app-cat">Men's Innerwear</div>
+                <div class="app-reward">Up to 70 Coins</div>
+                <a href="https://bitli.in/G2Z2SJn" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">💄</div>
+                <h3 class="app-name">Nykaa</h3>
+                <div class="app-cat">Beauty</div>
+                <div class="app-reward">Up to 60 Coins</div>
+                <a href="https://bitli.in/R1ekr7i" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🌿</div>
+                <h3 class="app-name">Mamaearth</h3>
+                <div class="app-cat">Beauty & Care</div>
+                <div class="app-reward">Up to 80 Coins</div>
+                <a href="https://bitli.in/KAk1wyv" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🧴</div>
+                <h3 class="app-name">WOW Skin</h3>
+                <div class="app-cat">Personal Care</div>
+                <div class="app-reward">Up to 80 Coins</div>
+                <a href="https://bitli.in/etiQ6Le" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">☕</div>
+                <h3 class="app-name">mCaffeine</h3>
+                <div class="app-cat">Personal Care</div>
+                <div class="app-reward">Up to 80 Coins</div>
+                <a href="https://bitli.in/tswnHmV" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">💻</div>
+                <h3 class="app-name">Croma</h3>
+                <div class="app-cat">Electronics</div>
+                <div class="app-reward">Up to 100 Coins</div>
+                <a href="https://bitli.in/lokhb2x" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">📺</div>
+                <h3 class="app-name">Reliance Digital</h3>
+                <div class="app-cat">Electronics</div>
+                <div class="app-reward">Up to 100 Coins</div>
+                <a href="https://bitli.in/cpOzuAI" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">⌚</div>
+                <h3 class="app-name">Noise</h3>
+                <div class="app-cat">Smartwatches</div>
+                <div class="app-reward">Up to 70 Coins</div>
+                <a href="https://bitli.in/nn5ntlw" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">💊</div>
+                <h3 class="app-name">PharmEasy</h3>
+                <div class="app-cat">Pharmacy</div>
+                <div class="app-reward">Up to 60 Coins</div>
+                <a href="https://bitli.in/vf6pMc0" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🩺</div>
+                <h3 class="app-name">Netmeds</h3>
+                <div class="app-cat">Pharmacy</div>
+                <div class="app-reward">Up to 60 Coins</div>
+                <a href="https://bitli.in/h1Buwxk" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">✈️</div>
+                <h3 class="app-name">MakeMyTrip</h3>
+                <div class="app-cat">Travel</div>
+                <div class="app-reward">Up to 200 Coins</div>
+                <a href="https://bitli.in/Cw7vhF2" target="_blank" class="btn btn-primary" style="width: 100%;">Book Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🚂</div>
+                <h3 class="app-name">Yatra</h3>
+                <div class="app-cat">Travel</div>
+                <div class="app-reward">Up to 150 Coins</div>
+                <a href="https://bitli.in/eltCt9m" target="_blank" class="btn btn-primary" style="width: 100%;">Book Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🏨</div>
+                <h3 class="app-name">Goibibo</h3>
+                <div class="app-cat">Travel</div>
+                <div class="app-reward">Up to 150 Coins</div>
+                <a href="https://bitli.in/xvfpT4w" target="_blank" class="btn btn-primary" style="width: 100%;">Book Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🛫</div>
+                <h3 class="app-name">Cleartrip</h3>
+                <div class="app-cat">Travel</div>
+                <div class="app-reward">Up to 150 Coins</div>
+                <a href="https://bitli.in/qal3Ime" target="_blank" class="btn btn-primary" style="width: 100%;">Book Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🧔‍♂️</div>
+                <h3 class="app-name">The Man Company</h3>
+                <div class="app-cat">Men's Grooming</div>
+                <div class="app-reward">Up to 80 Coins</div>
+                <a href="https://bitli.in/9Ts5uCI" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🌸</div>
+                <h3 class="app-name">Kama Ayurveda</h3>
+                <div class="app-cat">Beauty & Care</div>
+                <div class="app-reward">Up to 60 Coins</div>
+                <a href="https://bitli.in/HwVBd7x" target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now
+                    ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🧸</div>
+                <h3 class="app-name">FirstCry</h3>
+                <div class="app-cat">Kids & Baby</div>
+                <div class="app-reward">Up to 70 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=http%3A%2F%2Fwww.firstcry.com%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">🍲</div>
+                <h3 class="app-name">Gobble</h3>
+                <div class="app-cat">Meal Kits</div>
+                <div class="app-reward">Up to 50 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.gobble.com%2Faff-100%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">📱</div>
+                <h3 class="app-name">Toing AOS</h3>
+                <div class="app-cat">Apps & Food</div>
+                <div class="app-reward">Up to 40 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Din.swiggy.android.toing"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">💊</div>
+                <h3 class="app-name">Purenutrition</h3>
+                <div class="app-cat">Health & Fitness</div>
+                <div class="app-reward">Up to 60 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fpurenutrition.in%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">📚</div>
+                <h3 class="app-name">AbeBooks</h3>
+                <div class="app-cat">Books & Media</div>
+                <div class="app-reward">Up to 40 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.abebooks.com%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">📖</div>
+                <h3 class="app-name">Bookscape</h3>
+                <div class="app-cat">Books & Media</div>
+                <div class="app-reward">Up to 40 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fbookscape.com%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">📱</div>
+                <h3 class="app-name">Joyread (iOS)</h3>
+                <div class="app-cat">Apps & Reading</div>
+                <div class="app-reward">Up to 30 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fapps.apple.com%2Fus%2Fapp%2Fjoyread-fantasy-novel%2Fid1551079603"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="shopping">
+                <div class="app-icon">📕</div>
+                <h3 class="app-name">iberlibro</h3>
+                <div class="app-cat">Books & Media</div>
+                <div class="app-reward">Up to 40 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.iberlibro.com%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">Axis Bank Card</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fweb.axisbank.co.in%2FDigitalChannel%2FWebForm%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">SBI Flipkart Card</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.sbicard.com%2Fsprint%2FsimplySAVERupay"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">Federal Scapia</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fapply.scapia.cards%2Flanding_page"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">HDFC Swiggy Card</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.financemela.in%2Fcredit-cards%2Fhdfc-swiggy"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">RBL Cookies Card</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.rblbank.com%2Fshoprite-credit-card-lifetime-free"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">RBL Indian Oil Card</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.rblbank.com%2Fshoprite-credit-card-lifetime-free"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">RBL Shoprite Card</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.rblbank.com%2Fshoprite-credit-card-lifetime-free"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">RBL World Safari</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.rblbank.com%2Fshoprite-credit-card-lifetime-free"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="finance">
+                <div class="app-icon">💳</div>
+                <h3 class="app-name">RBL BookMyShow</h3>
+                <div class="app-cat">Finance</div>
+                <div class="app-reward">Up to 500 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.rblbank.com%2Fshoprite-credit-card-lifetime-free"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Apply Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="education">
+                <div class="app-icon">💻</div>
+                <h3 class="app-name">AppSumo</h3>
+                <div class="app-cat">Software & Tools</div>
+                <div class="app-reward">Up to 200 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fappsumo.com%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Shop Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="education">
+                <div class="app-icon">🎓</div>
+                <h3 class="app-name">Coursera</h3>
+                <div class="app-cat">Online Courses</div>
+                <div class="app-reward">Up to 150 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.coursera.org%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Learn Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="education">
+                <div class="app-icon">🎒</div>
+                <h3 class="app-name">Education.com</h3>
+                <div class="app-cat">Kids Learning</div>
+                <div class="app-reward">Up to 80 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=http%3A%2F%2Fwww.education.com%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Learn Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="education">
+                <div class="app-icon">🧑‍💻</div>
+                <h3 class="app-name">Edureka</h3>
+                <div class="app-cat">Tech Certifications</div>
+                <div class="app-reward">Up to 150 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fwww.edureka.co%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Learn Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="education">
+                <div class="app-icon">🗣️</div>
+                <h3 class="app-name">British Council</h3>
+                <div class="app-cat">IELTS & English</div>
+                <div class="app-reward">Up to 100 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fenglishonline.britishcouncil.org%2Fielts-coach"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Learn Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="education">
+                <div class="app-icon">🎟️</div>
+                <h3 class="app-name">Eventtrix</h3>
+                <div class="app-cat">Event Management</div>
+                <div class="app-reward">Up to 100 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Feventtrix.com%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Learn Now ↗</a>
+            </div>
+
+            <div class="app-card animate-on-scroll" data-category="education">
+                <div class="app-icon">🌍</div>
+                <h3 class="app-name">Mondly</h3>
+                <div class="app-cat">Language Learning</div>
+                <div class="app-reward">Up to 100 Coins</div>
+                <a href="https://linksredirect.com/?cid=274383&source=linkkit&url=https%3A%2F%2Fapp.mondly.com%2F"
+                    target="_blank" class="btn btn-primary" style="width: 100%;">Learn Now ↗</a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="index.html" class="nav-logo"
+                        style="margin-bottom:12px;display:inline-flex;">
+                        <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+                    </a>
+                    <p>Compare deals, earn coins, save money.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4><a href="deals.html">All Deals</a><a href="store.html">Stores</a><a
+                        href="rewards.html">Rewards</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4><a href="privacy-policy.html">Privacy</a><a href="terms.html">Terms</a><a
+                        href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 NeonMoney.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="spin.js"></script>
+    <script src="alerts.js"></script>
+
+    <script type='text/javascript'>
+        var cId = '271764';
+        (function (d, t) {
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = (document.location.protocol == 'https:' ? 'https://cdn0.cuelinks.com/js/' : 'http://cdn0.cuelinks.com/js/') + 'cuelinksv2.js';
+            document.getElementsByTagName('body')[0].appendChild(s);
+        }());
+    </script>
+
+    <script>
+        // FILTER SYSTEM
+        function filterStore(category, btnElement) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.app-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // SEARCH BAR LOGIC
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('store-search');
+            const storeCards = document.querySelectorAll('.app-card');
+
+            searchInput.addEventListener('focus', () => searchInput.style.borderColor = '#00f2fe');
+            searchInput.addEventListener('blur', () => searchInput.style.borderColor = '#333');
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+
+                storeCards.forEach(card => {
+                    const storeName = card.querySelector('.app-name').textContent.toLowerCase();
+                    const storeCat = card.querySelector('.app-cat').textContent.toLowerCase();
+
+                    if (storeName.includes(searchTerm) || storeCat.includes(searchTerm)) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNXh2aPjvZcWceDxCuMNzJegJ3RKwNsx0",
+            authDomain: "neonmoney-a2d18.firebaseapp.com",
+            projectId: "neonmoney-a2d18",
+            storageBucket: "neonmoney-a2d18.firebasestorage.app",
+            messagingSenderId: "759618988071",
+            appId: "1:759618988071:web:b65d190a3a7ececabc4602"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // Hide Login, Show Dashboard & Coins
+                document.getElementById('nav-auth-links').style.display = 'none';
+                document.getElementById('nav-user-menu').style.display = 'flex';
+                document.getElementById('nav-coins').style.display = 'block';
+
+                // Fetch Coins
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                if (userSnap.exists()) {
+                    const navCoinDisplay = document.getElementById('nav-coins-val');
+                    if (navCoinDisplay) navCoinDisplay.textContent = userSnap.data().coins.toLocaleString('en-IN');
+                }
+            }
+        });
+
+        // Logout Logic
+        document.querySelectorAll('.btn-logout').forEach(btn => {
+            btn.addEventListener('click', () => {
+                signOut(auth).then(() => { window.location.href = 'login.html'; });
+            });
+        });
+
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+        }
+    </script>
+
+</body>
+
+</html>

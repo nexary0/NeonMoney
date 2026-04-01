@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile — NeonMoney 💸</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="NeonMoney Logo"
+                    style="height: 36px; width: auto; margin-right: 8px; border-radius: 8px;">
+                Neon<span class="accent">Money</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-user-menu" style="display:flex; gap:8px; align-items:center;">
+                    <button class="btn btn-secondary btn-sm btn-logout" id="logout-btn">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout" style="padding-top: 100px;">
+
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-link"><span class="sidebar-icon">🏠</span> Dashboard</a>
+            <a href="rewards.html" class="sidebar-link"><span class="sidebar-icon">💰</span> My Coins</a>
+            <a href="rewards.html" class="sidebar-link"><span class="sidebar-icon">🎁</span> Rewards</a>
+            <a href="deals.html" class="sidebar-link"><span class="sidebar-icon">🔥</span> Deals</a>
+
+            <div class="sidebar-section-label">Activity</div>
+            <a href="alerts.html" class="sidebar-link"><span class="sidebar-icon">🔔</span> Alerts <span
+                    class="sidebar-badge">3</span></a>
+            <a href="history.html" class="sidebar-link"><span class="sidebar-icon">📋</span> History</a>
+            <a href="wishlist.html" class="sidebar-link"><span class="sidebar-icon">⭐</span> Wishlist</a>
+
+            <div class="sidebar-section-label">Account</div>
+            <a href="profile.html" class="sidebar-link active"><span class="sidebar-icon">👤</span> Profile</a>
+            <a href="faq.html" class="sidebar-link"><span class="sidebar-icon">❓</span> Help</a>
+            <button class="sidebar-link btn-logout" id="sidebar-logout-btn"
+                style="background:none;border:none;cursor:pointer;color:var(--text-muted);text-align:left;width:100%;"><span
+                    class="sidebar-icon">🚪</span> Logout</button>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <h2>My <span class="gradient-text">Profile</span></h2>
+                <p>Manage your account, view your balance, and track your activity.</p>
+            </div>
+
+            <div class="grid-2" style="gap:24px;">
+
+                <div class="glass-card" style="padding:32px; text-align:center;">
+                    <div style="font-size: 4rem; margin-bottom: 16px;">👨‍💻</div>
+                    <h3 id="profile-name" style="font-size: 1.8rem; margin-bottom: 8px;">Loading...</h3>
+                    <p id="profile-email" style="color: var(--text-muted); margin-bottom: 24px;">Loading email...</p>
+
+                    <div
+                        style="background: rgba(0,255,178,0.05); border: 1px solid rgba(0,255,178,0.2); padding: 16px; border-radius: var(--radius-md);">
+                        <p
+                            style="font-size: 0.85rem; color: var(--neon-green); text-transform: uppercase; font-weight: bold;">
+                            Total Wallet Balance</p>
+                        <div style="font-family: var(--font-display); font-size: 2.5rem; color: #fff;"
+                            id="profile-coins">... 💰</div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="padding:32px;">
+                    <h3 style="margin-bottom: 20px;">Account Details</h3>
+                    <div class="form-group">
+                        <label class="form-label">Member Since</label>
+                        <input type="text" class="form-input" id="profile-joined" value="Loading..." disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Subscription Tier</label>
+                        <input type="text" class="form-input" value="Free User" disabled
+                            style="color: var(--text-muted);">
+                    </div>
+
+                    <h3 style="margin-top: 32px; margin-bottom: 20px;">Lifetime Summary</h3>
+                    <div class="flex-between" style="padding: 12px 0; border-bottom: 1px solid var(--border);">
+                        <span>Items Purchased</span> <strong style="color: var(--text-primary);">0</strong>
+                    </div>
+                    <div class="flex-between" style="padding: 12px 0; border-bottom: 1px solid var(--border);">
+                        <span>Items in Wishlist</span> <strong style="color: var(--text-primary);">2</strong>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNXh2aPjvZcWceDxCuMNzJegJ3RKwNsx0",
+            authDomain: "neonmoney-a2d18.firebaseapp.com",
+            projectId: "neonmoney-a2d18",
+            storageBucket: "neonmoney-a2d18.firebasestorage.app",
+            messagingSenderId: "759618988071",
+            appId: "1:759618988071:web:b65d190a3a7ececabc4602"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // 1. Inject the user's real Email address
+                const emailDisplay = document.getElementById('profile-email');
+                if (emailDisplay) emailDisplay.textContent = user.email;
+
+                // 2. Calculate their Name from the email
+                let displayName = user.email.split('@')[0];
+                displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+                const nameDisplay = document.getElementById('profile-name');
+                if (nameDisplay) nameDisplay.textContent = displayName;
+
+                // 3. Find out exactly when they created their account
+                const creationDate = new Date(user.metadata.creationTime);
+                const formattedDate = creationDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                const joinedDisplay = document.getElementById('profile-joined');
+                if (joinedDisplay) joinedDisplay.value = formattedDate;
+
+                // 4. Connect to Firestore and pull their LIVE Coin Balance!
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                const coinsDisplay = document.getElementById('profile-coins');
+                const navCoinDisplay = document.getElementById('nav-coins-val');
+
+                let currentCoins = 0;
+                if (userSnap.exists()) {
+                    currentCoins = userSnap.data().coins;
+                } else {
+                    // Fallback to local storage if DB isn't set up yet
+                    currentCoins = parseInt(localStorage.getItem('neon_coins')) || 0;
+                }
+
+                if (coinsDisplay) coinsDisplay.textContent = currentCoins + " 💰";
+                if (navCoinDisplay) navCoinDisplay.textContent = currentCoins.toLocaleString('en-IN');
+
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Logout logic
+        const logoutBtns = document.querySelectorAll('.btn-logout');
+        logoutBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                signOut(auth).then(() => {
+                    window.location.href = 'login.html';
+                });
+            });
+        });
+    </script>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

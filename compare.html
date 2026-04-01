@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Prices | NeonMoney</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #10B981;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Custom scrollbar for the specs table so it doesn't get 10 miles long */
+        .specs-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .specs-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .specs-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .specs-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 flex items-center justify-between h-16">
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-gray-800">
+                <i class="fa-solid fa-bolt text-yellow-500"></i> NeonMoney
+            </a>
+            <div class="hidden md:flex gap-6 font-medium text-sm text-gray-600">
+                <a href="compare.html" class="text-green-600 font-bold">Compare Prices</a>
+                <a href="coupons.html" class="hover:text-green-600">Coupons</a>
+                <a href="alerts.html" class="hover:text-green-600">Price Drop Alerts</a>
+            </div>
+            <a href="login.html"
+                class="bg-gray-800 text-white px-5 py-2 rounded font-medium text-sm hover:bg-gray-700">Login</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-extrabold text-gray-800 mb-2">Versus Mode</h1>
+            <p class="text-gray-500">Deep-dive comparison of all technical specifications.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
+
+            <div class="glass-panel p-6 rounded-xl border-t-4 border-t-yellow-500 relative flex flex-col h-[800px]">
+                <div
+                    class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase shadow">
+                    Product 1</div>
+
+                <div class="flex mt-4 mb-6 shrink-0">
+                    <input type="text" id="link-1"
+                        class="flex-1 border rounded-l px-4 py-3 outline-none focus:border-yellow-500 bg-gray-50 text-sm"
+                        placeholder="Paste link...">
+                    <button id="btn-1"
+                        class="bg-gray-800 text-white font-bold px-4 rounded-r hover:bg-gray-700 transition">Load</button>
+                </div>
+
+                <div id="loading-1" class="hidden py-10 text-center">
+                    <div class="loader"></div>
+                </div>
+
+                <div id="result-1" class="hidden flex-col bg-white rounded-lg flex-grow overflow-hidden">
+                    <div class="h-40 w-full flex items-center justify-center mb-4 shrink-0"><img id="img-1" src=""
+                            class="max-h-full object-contain mix-blend-multiply"></div>
+                    <div class="text-center mb-4 shrink-0 px-4">
+                        <span id="store-1"
+                            class="text-[10px] font-bold px-2 py-1 bg-gray-100 rounded text-gray-600 uppercase">Store</span>
+                        <h2 id="title-1" class="font-bold text-gray-800 mt-2 text-sm leading-snug line-clamp-3"></h2>
+                    </div>
+
+                    <div
+                        class="border-t border-b border-gray-100 flex-grow overflow-y-auto specs-scroll px-4 py-2 mb-4 bg-gray-50/50">
+                        <h3
+                            class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 sticky top-0 bg-gray-50 py-1">
+                            All Specifications</h3>
+                        <div id="specs-1" class="flex flex-col">
+                        </div>
+                    </div>
+
+                    <div class="mt-auto w-full shrink-0 px-4 pb-4">
+                        <a href="#" id="buy-1" target="_blank"
+                            class="w-full block bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded text-center transition shadow">Buy
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-xl border-t-4 border-t-blue-500 relative flex flex-col h-[800px]">
+                <div
+                    class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase shadow">
+                    Product 2</div>
+
+                <div class="flex mt-4 mb-6 shrink-0">
+                    <input type="text" id="link-2"
+                        class="flex-1 border rounded-l px-4 py-3 outline-none focus:border-blue-500 bg-gray-50 text-sm"
+                        placeholder="Paste link...">
+                    <button id="btn-2"
+                        class="bg-gray-800 text-white font-bold px-4 rounded-r hover:bg-gray-700 transition">Load</button>
+                </div>
+
+                <div id="loading-2" class="hidden py-10 text-center">
+                    <div class="loader"></div>
+                </div>
+
+                <div id="result-2" class="hidden flex-col bg-white rounded-lg flex-grow overflow-hidden">
+                    <div class="h-40 w-full flex items-center justify-center mb-4 shrink-0"><img id="img-2" src=""
+                            class="max-h-full object-contain mix-blend-multiply"></div>
+                    <div class="text-center mb-4 shrink-0 px-4">
+                        <span id="store-2"
+                            class="text-[10px] font-bold px-2 py-1 bg-gray-100 rounded text-gray-600 uppercase">Store</span>
+                        <h2 id="title-2" class="font-bold text-gray-800 mt-2 text-sm leading-snug line-clamp-3"></h2>
+                    </div>
+
+                    <div
+                        class="border-t border-b border-gray-100 flex-grow overflow-y-auto specs-scroll px-4 py-2 mb-4 bg-gray-50/50">
+                        <h3
+                            class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 sticky top-0 bg-gray-50 py-1">
+                            All Specifications</h3>
+                        <div id="specs-2" class="flex flex-col">
+                        </div>
+                    </div>
+
+                    <div class="mt-auto w-full shrink-0 px-4 pb-4">
+                        <a href="#" id="buy-2" target="_blank"
+                            class="w-full block bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded text-center transition shadow">Buy
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getStoreInfo(url) {
+            const pUrl = url.toLowerCase();
+            if (pUrl.includes('amazon')) return { badge: 'Amazon', bg: 'bg-yellow-100', text: 'text-yellow-700', btn: '#F59E0B' };
+            if (pUrl.includes('nykaa')) return { badge: 'Nykaa', bg: 'bg-pink-100', text: 'text-pink-700', btn: '#EC4899' };
+            if (pUrl.includes('flipkart')) return { badge: 'Flipkart', bg: 'bg-blue-100', text: 'text-blue-700', btn: '#2563EB' };
+            if (pUrl.includes('myntra')) return { badge: 'Myntra', bg: 'bg-pink-100', text: 'text-pink-700', btn: '#EC4899' };
+            return { badge: 'Store', bg: 'bg-green-100', text: 'text-green-700', btn: '#10B981' };
+        }
+
+        async function loadProduct(productNumber) {
+            let linkInput = document.getElementById(`link-${productNumber}`).value.trim();
+            if (!linkInput) { alert("Please paste a shopping link first!"); return; }
+
+            // 🛠️ AUTO-FIX: If the user forgets 'https://', this adds it automatically so the robot doesn't crash!
+            if (!linkInput.startsWith('http://') && !linkInput.startsWith('https://')) {
+                linkInput = 'https://' + linkInput;
+                document.getElementById(`link-${productNumber}`).value = linkInput;
+            }
+
+            document.getElementById(`loading-${productNumber}`).classList.remove('hidden');
+            document.getElementById(`result-${productNumber}`).classList.add('hidden');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/track-price', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ productUrl: linkInput })
+                });
+
+                const data = await response.json();
+
+                // 🚨 THE UNMASKER: This will now show the REAL error from the backend!
+                if (!data.success) {
+                    throw new Error(data.error || "Unknown backend failure.");
+                }
+
+                const safeTitle = data.title || "Unknown Product";
+                const safePrice = data.currentPrice || 0;
+                const safeImage = data.imageUrl || "";
+
+                document.getElementById(`img-${productNumber}`).src = safeImage;
+                document.getElementById(`title-${productNumber}`).textContent = safeTitle;
+
+                // --- THE DYNAMIC TABLE BUILDER ---
+                const specsContainer = document.getElementById(`specs-${productNumber}`);
+                specsContainer.innerHTML = ''; // Clear old data
+
+                // Always add the price at the top of the table
+                specsContainer.innerHTML += `
+                    <div class="flex justify-between text-xs border-b border-gray-200 py-2">
+                        <span class="text-gray-500 font-medium">Current Price</span>
+                        <span class="font-bold text-green-600 text-sm">₹${safePrice.toLocaleString('en-IN')}</span>
+                    </div>
+                `;
+
+                // Loop through the massive specs list and build rows!
+                if (data.specifications && Object.keys(data.specifications).length > 0) {
+                    for (const [key, value] of Object.entries(data.specifications)) {
+                        specsContainer.innerHTML += `
+                            <div class="flex justify-between text-[11px] border-b border-gray-200 py-2 gap-4">
+                                <span class="text-gray-500 font-medium w-1/3">${key}</span>
+                                <span class="text-gray-800 text-right w-2/3 break-words">${value}</span>
+                            </div>
+                        `;
+                    }
+                } else {
+                    specsContainer.innerHTML += `
+                        <div class="text-xs text-gray-400 py-4 text-center italic">
+                            Detailed specifications are not being scraped by your backend yet.
+                        </div>
+                    `;
+                }
+
+                const storeInfo = getStoreInfo(linkInput);
+                const storeBadge = document.getElementById(`store-${productNumber}`);
+                storeBadge.textContent = storeInfo.badge;
+                storeBadge.className = `text-[10px] font-bold px-2 py-1 rounded uppercase mb-3 ${storeInfo.bg} ${storeInfo.text}`;
+
+                const buyBtn = document.getElementById(`buy-${productNumber}`);
+                buyBtn.href = linkInput;
+                buyBtn.style.backgroundColor = storeInfo.btn;
+
+                document.getElementById(`loading-${productNumber}`).classList.add('hidden');
+                document.getElementById(`result-${productNumber}`).classList.remove('hidden');
+
+            } catch (err) {
+                console.error("Crash details:", err);
+                document.getElementById(`loading-${productNumber}`).classList.add('hidden');
+                // The alert box will now tell you EXACTLY what went wrong!
+                alert(`Error on Product ${productNumber}: ${err.message}`);
+            }
+        }
+
+        document.getElementById('btn-1').addEventListener('click', () => loadProduct(1));
+        document.getElementById('btn-2').addEventListener('click', () => loadProduct(2));
+    </script>
+</body>
+
+</html>

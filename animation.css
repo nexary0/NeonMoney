@@ -1,0 +1,595 @@
+/* ============================================================
+   NEON MONEYVERSE — ANIMATIONS & MICRO-INTERACTIONS
+   ============================================================ */
+
+/* ── KEYFRAMES ── */
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    33% {
+        transform: translateY(-12px) rotate(2deg);
+    }
+
+    66% {
+        transform: translateY(-6px) rotate(-1deg);
+    }
+}
+
+@keyframes floatReverse {
+
+    0%,
+    100% {
+        transform: translateY(-8px) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(8px) rotate(2deg);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(0, 255, 178, 0.2), 0 0 40px rgba(0, 255, 178, 0.05);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(0, 255, 178, 0.4), 0 0 80px rgba(0, 255, 178, 0.15);
+    }
+}
+
+@keyframes pulse-glow-purple {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 50px rgba(124, 58, 237, 0.6), 0 0 100px rgba(124, 58, 237, 0.2);
+    }
+}
+
+@keyframes coin-bounce {
+    0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-20px) scale(1.1) rotate(15deg);
+    }
+
+    50% {
+        transform: translateY(-30px) scale(1.05) rotate(0deg);
+    }
+
+    75% {
+        transform: translateY(-15px) scale(1.08) rotate(-10deg);
+    }
+
+    100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+}
+
+@keyframes spin-wheel {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes neon-border-trace {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes particle-float {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translate(20px, -40px) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-10px, -80px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+@keyframes counter-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes blink-caret {
+
+    0%,
+    100% {
+        border-color: var(--neon-green);
+    }
+
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes price-drop {
+    0% {
+        transform: translateY(0);
+        color: var(--text-primary);
+    }
+
+    50% {
+        transform: translateY(-4px);
+        color: var(--neon-green);
+    }
+
+    100% {
+        transform: translateY(0);
+        color: var(--neon-green);
+    }
+}
+
+@keyframes alert-pulse {
+
+    0%,
+    100% {
+        border-color: rgba(255, 107, 43, 0.25);
+    }
+
+    50% {
+        border-color: rgba(255, 107, 43, 0.6);
+        box-shadow: 0 0 20px rgba(255, 107, 43, 0.2);
+    }
+}
+
+@keyframes streak {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* ── HERO ANIMATIONS ── */
+.hero-title {
+    animation: slide-in-left 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-title.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.hero-subtitle {
+    animation: slide-in-left 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.hero-cta {
+    animation: slide-in-left 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.hero-card-anim {
+    animation: slide-in-right 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* ── FLOAT ANIMATIONS ── */
+.float-1 {
+    animation: float 6s ease-in-out infinite;
+}
+
+.float-2 {
+    animation: float 8s ease-in-out 1s infinite;
+}
+
+.float-3 {
+    animation: floatReverse 7s ease-in-out 0.5s infinite;
+}
+
+.float-coin {
+    animation: coin-bounce 3s ease-in-out infinite;
+}
+
+/* ── PULSE ANIMATIONS ── */
+.pulse-green {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.pulse-purple {
+    animation: pulse-glow-purple 3s ease-in-out infinite;
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-on-scroll.delay-1 {
+    transition-delay: 0.1s;
+}
+
+.animate-on-scroll.delay-2 {
+    transition-delay: 0.2s;
+}
+
+.animate-on-scroll.delay-3 {
+    transition-delay: 0.3s;
+}
+
+.animate-on-scroll.delay-4 {
+    transition-delay: 0.4s;
+}
+
+.animate-on-scroll.delay-5 {
+    transition-delay: 0.5s;
+}
+
+/* ── SHIMMER LOADING ── */
+.shimmer {
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.03) 25%,
+            rgba(255, 255, 255, 0.08) 50%,
+            rgba(255, 255, 255, 0.03) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* ── RIPPLE BUTTON ── */
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple .ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin-top: -5px;
+    margin-left: -5px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+/* ── SPIN WHEEL ANIMATION ── */
+.spin-ring {
+    animation: rotate-slow 8s linear infinite;
+}
+
+.spinning .spin-wheel-graphic {
+    transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+
+/* ── STREAK EFFECT ── */
+.streak-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.streak-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    animation: streak 3s ease-in-out 2s infinite;
+}
+
+/* ── NEON GLOW TEXT ── */
+.glow-text-green {
+    text-shadow: 0 0 10px rgba(0, 255, 178, 0.5), 0 0 20px rgba(0, 255, 178, 0.3);
+}
+
+.glow-text-purple {
+    text-shadow: 0 0 10px rgba(124, 58, 237, 0.6), 0 0 20px rgba(124, 58, 237, 0.3);
+}
+
+/* ── ALERT PULSE ── */
+.alert-pulse {
+    animation: alert-pulse 2s ease-in-out infinite;
+}
+
+/* ── STEP NUMBER ANIMATION ── */
+.step-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.step-card:hover .step-num {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+/* ── NOTIFICATION SLIDE ── */
+.notification-enter {
+    animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.notification-exit {
+    animation: slide-up 0.3s cubic-bezier(0.4, 0, 1, 1) reverse forwards;
+}
+
+/* ── COIN COUNT ANIMATE ── */
+.coin-count-anim {
+    animation: counter-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── TYPING CURSOR ── */
+.typing-cursor {
+    border-right: 2px solid var(--neon-green);
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+/* ── CARD GLOW BORDER ── */
+.glow-border-hover {
+    position: relative;
+}
+
+.glow-border-hover::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s;
+    animation: neon-border-trace 3s linear infinite;
+    background-size: 200% 200%;
+}
+
+.glow-border-hover:hover::before {
+    opacity: 1;
+}
+
+/* ── PARTICLES (JS-controlled) ── */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particle-float var(--duration, 3s) ease-out var(--delay, 0s) forwards;
+}
+
+/* ── PRICE DROP HIGHLIGHT ── */
+.price-drop-anim {
+    animation: price-drop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================================
+   FIRE & ICE ANIMATED BUTTON
+   ============================================================ */
+
+.fire-ice-btn {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 48px;
+    font-family: var(--font-display, sans-serif);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border-radius: 50px;
+    background: #050505;
+    /* Deep black center */
+    z-index: 1;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* This creates the glowing, animated outer ring */
+.fire-ice-btn::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    /* The gradient blending Fire (Orange/Red) and Ice (Blue/Cyan) */
+    background: linear-gradient(90deg, #ff3300, #ff8c00, #00f2fe, #4facfe, #ff3300);
+    background-size: 300%;
+    border-radius: 50px;
+    z-index: -1;
+    filter: blur(12px);
+    /* Makes it glow like energy */
+    animation: fireIcePulse 6s linear infinite;
+}
+
+/* This keeps the inside of the button dark so the text is readable */
+.fire-ice-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0a0a0f;
+    border-radius: 50px;
+    z-index: -1;
+}
+
+/* Hover effect to make it feel interactive */
+.fire-ice-btn:hover {
+    transform: scale(1.05);
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.fire-ice-btn:hover::before {
+    filter: blur(16px);
+    /* Glows brighter on hover */
+}
+
+/* The animation that moves the fire and ice around the button */
+@keyframes fireIcePulse {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

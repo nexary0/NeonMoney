@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up — NeonMoney 💸</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+        }
+
+        .auth-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            max-width: 900px;
+            width: 100%;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .auth-left {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(0, 255, 178, 0.08));
+            padding: 60px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .auth-left h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .auth-left p {
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+
+        .auth-perk {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .auth-perk-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(124, 58, 237, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .auth-right {
+            background: var(--bg-mid);
+            padding: 48px;
+            overflow-y: auto;
+        }
+
+        .auth-right h3 {
+            font-family: var(--font-body);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            font-family: var(--font-ui);
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+
+        .btn-google {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 13px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-ui);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 20px;
+        }
+
+        .btn-google:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .error-msg {
+            display: none;
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            color: var(--neon-red);
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+        }
+
+        .terms-note {
+            font-family: var(--font-ui);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .terms-note a {
+            color: var(--neon-green);
+            text-decoration: none;
+        }
+
+        .auth-footer-text {
+            text-align: center;
+            font-family: var(--font-ui);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 16px;
+        }
+
+        .auth-footer-text a {
+            color: var(--neon-green);
+            text-decoration: none;
+        }
+
+        @media (max-width:768px) {
+            .auth-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-left {
+                display: none;
+            }
+
+            .auth-right {
+                padding: 40px 28px;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+    <div class="bg-mesh"></div>
+    <div class="bg-noise"></div>
+    <div class="auth-page">
+        <div class="auth-grid animate-on-scroll">
+            <div class="auth-left">
+                <a href="index.html" class="nav-logo" style="margin-bottom:40px;display:inline-flex;">
+                    <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+                </a>
+                <h2>Start Saving <span class="gradient-text">Today</span></h2>
+                <p>Join 50,000+ smart shoppers. Free forever. No credit card needed.</p>
+                <div class="auth-perk">
+                    <div class="auth-perk-icon">🎁</div>Get 100 welcome coins instantly on signup
+                </div>
+                <div class="auth-perk">
+                    <div class="auth-perk-icon">💸</div>Compare Amazon & Flipkart side by side
+                </div>
+                <div class="auth-perk">
+                    <div class="auth-perk-icon">🎰</div>Daily spin wheel — free coins every day
+                </div>
+                <div class="auth-perk">
+                    <div class="auth-perk-icon">🔔</div>Price drop alerts for your wishlist
+                </div>
+                <div class="auth-perk">
+                    <div class="auth-perk-icon">🏆</div>Redeem coins for real gift cards
+                </div>
+            </div>
+            <div class="auth-right">
+                <h3>Create Account</h3>
+                <p class="sub">It's free. Always will be. 🎉</p>
+                <button class="btn-google" type="button">
+                    <svg width="18" height="18" viewBox="0 0 18 18">
+                        <path fill="#EA4335"
+                            d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                        <path fill="#4285F4"
+                            d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" />
+                        <path fill="#FBBC05"
+                            d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" />
+                        <path fill="#34A853"
+                            d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.96l3.007 2.332C4.672 5.163 6.656 3.58 9 3.58z" />
+                    </svg>
+                    Sign up with Google
+                </button>
+                <div class="divider-text">or with email</div><br>
+                <div class="error-msg" id="signup-error"></div>
+                <form id="signup-form">
+                    <div class="form-group"><label class="form-label">Full Name</label><input type="text"
+                            id="signup-name" class="form-input" placeholder="Rahul Sharma" required></div>
+                    <div class="form-group"><label class="form-label">Email</label><input type="email" id="signup-email"
+                            class="form-input" placeholder="you@example.com" required></div>
+                    <div class="form-group"><label class="form-label">Password</label><input type="password"
+                            id="signup-password" class="form-input" placeholder="Min 6 characters" required></div>
+                    <div class="form-group"><label class="form-label">Confirm Password</label><input type="password"
+                            id="signup-confirm" class="form-input" placeholder="Re-enter password" required></div>
+                    <button type="submit" class="btn btn-primary btn-ripple" style="width:100%;">🚀 Create Account &
+                        Earn 100 Coins</button>
+                </form>
+                <p class="terms-note">By signing up you agree to our <a href="terms.html">Terms</a> and <a
+                        href="privacy-policy.html">Privacy Policy</a></p>
+                <p class="auth-footer-text">Already have an account? <a href="login.html">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script src="alerts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Alerts | NeonMoney</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .pulse-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        /* Add click ability to delete buttons */
+        .delete-btn {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .delete-btn:hover {
+            color: #EF4444;
+            /* Red color on hover */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 flex items-center justify-between h-16">
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-gray-800">
+                <i class="fa-solid fa-bolt text-yellow-500"></i> NeonMoney
+            </a>
+            <div class="hidden md:flex gap-6 font-medium text-sm text-gray-600">
+                <a href="compare.html" class="hover:text-green-600">Compare Prices</a>
+                <a href="coupons.html" class="hover:text-green-600">Coupons</a>
+                <a href="alerts.html" class="text-green-600 font-bold">Price Drop Alerts</a>
+            </div>
+            <a href="login.html"
+                class="bg-gray-800 text-white px-5 py-2 rounded font-medium text-sm hover:bg-gray-700">Login</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-10 max-w-7xl">
+
+        <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+            <div>
+                <h1 class="text-3xl font-extrabold text-gray-800 flex items-center gap-3">
+                    <i class="fa-solid fa-bell text-yellow-500"></i> My Active Alerts
+                </h1>
+                <p class="text-gray-500 mt-2">We'll email you the second these products hit your target price.</p>
+            </div>
+            <button id="create-new-alert-btn"
+                class="bg-gray-800 text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-700 transition shadow-lg">
+                <i class="fa-solid fa-plus mr-2"></i> Create New Alert
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+
+            <div class="glass-panel p-8 rounded-xl flex flex-col h-full bg-white shadow-lg lg:sticky lg:top-24">
+
+                <div class="h-64 w-full flex items-center justify-center mb-6 border rounded-lg p-4 bg-gray-50/50">
+                    <img id="main-product-image" src="PLACEHOLDER_PRODUCT_URL" alt="Main Product Image"
+                        class="max-h-full object-contain">
+
+                    <div id="image-placeholder" class="hidden text-center text-gray-300">
+                        <i class="fa-solid fa-mobile-screen-button text-9xl"></i>
+                        <p class="text-xs mt-3">Image not found</p>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <span
+                        class="text-[10px] font-bold px-2 py-1 bg-green-100 text-green-700 rounded uppercase">Featured</span>
+                    <h2 class="text-xl font-bold text-gray-800 mt-2 leading-tight">iQOO Neo 10R 5G (Conqueror Black, 256
+                        GB) (8 GB RAM)</h2>
+                </div>
+
+                <div class="mt-auto border-t pt-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">Price Alert Progress</p>
+                        <p id="price-gap" class="text-xs font-bold text-red-500">₹4,999 to go</p>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3 relative overflow-hidden">
+                        <div id="price-progress-bar" class="absolute top-0 left-0 h-full bg-green-500 rounded-full"
+                            style="width: 85%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs mt-2 text-gray-500 font-medium">
+                        <span>Target: <strong>₹30,000</strong></span>
+                        <span>Current: <strong>₹34,999</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-8">
+
+                <div class="glass-panel p-6 rounded-xl bg-green-600/10 border-green-200">
+                    <h2 class="text-lg font-bold text-gray-800 mb-4">Quick Add from Shopping Link</h2>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="text" id="new-alert-url"
+                            class="flex-1 border rounded-lg px-4 py-3 outline-none focus:border-green-500 bg-white"
+                            placeholder="Paste Amazon, Flipkart, or Myntra link here...">
+                        <button id="track-btn"
+                            class="bg-green-500 text-white font-bold px-8 py-3 rounded-lg hover:bg-green-600 transition">Track</button>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800 mb-5">Alerts from this product group</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <div class="glass-panel p-5 rounded-xl flex gap-5 items-center relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1.5 h-full bg-green-500"></div>
+                            <div class="w-24 h-24 bg-gray-50 rounded flex items-center justify-center p-2">
+                                <i class="fa-solid fa-mobile-screen-button text-4xl text-gray-300"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-0.5 bg-blue-100 text-blue-700 rounded uppercase">Amazon</span>
+                                    <button class="delete-btn text-gray-400" title="Delete alert"><i
+                                            class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                                <h3 class="font-bold text-gray-800 text-sm line-clamp-2 mb-2">iQOO Neo 10R 5G (Conqueror
+                                    Black, 256 GB) (8 GB RAM)</h3>
+                                <div class="flex justify-between items-end mt-3">
+                                    <div>
+                                        <div class="text-xs text-gray-500">Current</div>
+                                        <div class="font-bold text-gray-800">₹34,999</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-gray-500">Target</div>
+                                        <div class="font-bold text-green-600 text-lg">₹30,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel p-5 rounded-xl flex gap-5 items-center relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1.5 h-full bg-green-500"></div>
+                            <div class="w-24 h-24 bg-gray-50 rounded flex items-center justify-center p-2">
+                                <i class="fa-solid fa-laptop text-4xl text-gray-300"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span
+                                        class="text-[10px] font-bold px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded uppercase">Flipkart</span>
+                                    <button class="delete-btn text-gray-400" title="Delete alert"><i
+                                            class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                                <h3 class="font-bold text-gray-800 text-sm line-clamp-2 mb-2">Motorola G57 Power 5G
+                                    (Corsair, 128 GB Storage)</h3>
+                                <div class="flex justify-between items-end mt-3">
+                                    <div>
+                                        <div class="text-xs text-gray-500">Current</div>
+                                        <div class="font-bold text-gray-800">₹15,199</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-gray-500">Target</div>
+                                        <div class="font-bold text-green-600 text-lg">₹14,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center text-sm font-medium text-gray-500 flex items-center justify-center gap-2">
+                    <span class="pulse-dot"></span> Scrapers are actively monitoring your items
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="create-alert-modal"
+        class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md m-4 transform transition-all">
+            <div class="flex justify-between items-center mb-5">
+                <h3 class="text-xl font-bold text-gray-800">Create Custom Alert</h3>
+                <button id="close-modal-btn" class="text-gray-400 hover:text-red-500 transition"><i
+                        class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Product Link</label>
+                    <input type="text" id="modal-url"
+                        class="w-full border rounded-lg px-4 py-3 outline-none focus:border-green-500 bg-gray-50 text-sm"
+                        placeholder="Paste Amazon, Flipkart, Myntra link...">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Your Target Price (₹)</label>
+                    <input type="number" id="modal-price"
+                        class="w-full border rounded-lg px-4 py-3 outline-none focus:border-green-500 bg-gray-50 text-sm"
+                        placeholder="e.g. 15000">
+                    <p class="text-xs text-gray-400 mt-1">We will alert you when it drops below this price.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex gap-3">
+                <button id="cancel-modal-btn"
+                    class="flex-1 bg-gray-100 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-200 transition">Cancel</button>
+                <button id="save-alert-btn"
+                    class="flex-1 bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-gray-700 transition shadow">Save
+                    Alert</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. THE CREATE NEW ALERT POP-UP LOGIC ---
+        const createBtn = document.getElementById('create-new-alert-btn');
+        const modal = document.getElementById('create-alert-modal');
+        const closeBtn = document.getElementById('close-modal-btn');
+        const cancelBtn = document.getElementById('cancel-modal-btn');
+        const saveAlertBtn = document.getElementById('save-alert-btn');
+
+        // Open the pop-up
+        if (createBtn) {
+            createBtn.addEventListener('click', function () {
+                modal.classList.remove('hidden');
+            });
+        }
+
+        // Close the pop-up
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            document.getElementById('modal-url').value = '';
+            document.getElementById('modal-price').value = '';
+        };
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+        // Save Alert Button (Inside the pop-up)
+        if (saveAlertBtn) {
+            saveAlertBtn.addEventListener('click', async function () {
+                let url = document.getElementById('modal-url').value.trim();
+                let targetPrice = document.getElementById('modal-price').value.trim();
+
+                if (!url || !targetPrice) {
+                    alert("Please fill in both the link and your target price!");
+                    return;
+                }
+
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    url = 'https://' + url;
+                }
+
+                const originalText = saveAlertBtn.innerHTML;
+                saveAlertBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+                saveAlertBtn.disabled = true;
+
+                try {
+                    const response = await fetch('http://localhost:3000/api/track-price', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ productUrl: url, targetPrice: targetPrice })
+                    });
+
+                    const data = await response.json();
+                    if (!data.success) throw new Error(data.error);
+
+                    alert("✅ Custom Price Alert Saved!");
+                    closeModal();
+
+                } catch (err) {
+                    alert(`Error: ${err.message}`);
+                } finally {
+                    saveAlertBtn.innerHTML = originalText;
+                    saveAlertBtn.disabled = false;
+                }
+            });
+        }
+
+        // --- 2. THE QUICK ADD "TRACK" BUTTON LOGIC ---
+        const trackBtn = document.getElementById('track-btn');
+        const urlInput = document.getElementById('new-alert-url');
+
+        if (trackBtn && urlInput) {
+            trackBtn.addEventListener('click', async function () {
+                let url = urlInput.value.trim();
+
+                if (!url) {
+                    alert("Please paste a shopping link first!");
+                    return;
+                }
+
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    url = 'https://' + url;
+                }
+
+                const originalText = trackBtn.innerHTML;
+                trackBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Scraping...';
+                trackBtn.disabled = true;
+                trackBtn.style.opacity = '0.7';
+
+                try {
+                    const response = await fetch('http://localhost:3000/api/track-price', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ productUrl: url })
+                    });
+
+                    const data = await response.json();
+
+                    if (!data.success) {
+                        throw new Error(data.error || "Failed to find product details.");
+                    }
+
+                    // --- UPDATE THE DASHBOARD WITH REAL DATA ---
+                    const productImg = document.getElementById('main-product-image');
+                    const imgPlaceholder = document.getElementById('image-placeholder');
+
+                    productImg.src = data.imageUrl;
+                    productImg.classList.remove('hidden');
+                    imgPlaceholder.classList.add('hidden');
+
+                    const titleElement = document.querySelector('.glass-panel h2.text-xl');
+                    if (titleElement) titleElement.textContent = data.title;
+
+                    const priceStrongTags = document.querySelector('.lg\\:sticky').querySelectorAll('strong');
+                    if (priceStrongTags.length >= 2) {
+                        priceStrongTags[1].textContent = '₹' + data.currentPrice.toLocaleString('en-IN');
+                    }
+
+                    alert("✅ Product successfully tracked and saved to your database!");
+
+                } catch (err) {
+                    console.error("Crash details:", err);
+                    alert(`Error: ${err.message}`);
+                } finally {
+                    trackBtn.innerHTML = originalText;
+                    trackBtn.disabled = false;
+                    trackBtn.style.opacity = '1';
+                    urlInput.value = '';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

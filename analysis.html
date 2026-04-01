@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price History Analysis | NeonMoney</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .image-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f4f6;
+            color: #9ca3af;
+            font-size: 3rem;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+
+        /* Cinematic Countdown Animation */
+        .pulse-number {
+            animation: pulse-scale 1s infinite ease-in-out;
+        }
+
+        @keyframes pulse-scale {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            }
+
+            50% {
+                transform: scale(1.3);
+                opacity: 0.8;
+                color: #10B981;
+                text-shadow: 0 0 30px rgba(16, 185, 129, 1);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 flex items-center justify-between h-16">
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-gray-800">
+                <i class="fa-solid fa-bolt text-yellow-500"></i> NeonMoney
+            </a>
+            <div class="hidden md:flex gap-6 font-medium text-sm text-gray-600">
+                <a href="compare.html" class="hover:text-green-600">Compare Prices</a>
+                <a href="coupons.html" class="hover:text-green-600">Coupons</a>
+                <a href="alerts.html" class="hover:text-green-600">Price Drop Alerts</a>
+            </div>
+            <a href="login.html"
+                class="bg-gray-800 text-white px-5 py-2 rounded font-medium text-sm hover:bg-gray-700">Login</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-6">
+        <div class="max-w-4xl mx-auto flex shadow-lg rounded-lg overflow-hidden border border-gray-200 bg-white">
+            <div class="px-4 flex items-center bg-gray-50 border-r text-gray-500">
+                <i class="fa-solid fa-link"></i>
+            </div>
+            <input type="text" id="main-search-bar"
+                class="flex-1 px-4 py-4 outline-none text-gray-800 text-lg font-medium"
+                placeholder="Paste link here...">
+            <button id="main-search-btn"
+                class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-8 py-4 transition text-lg">
+                Track Price
+            </button>
+        </div>
+    </div>
+
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 z-50 flex flex-col items-center justify-center hidden">
+        <i class="fa-solid fa-robot text-4xl text-gray-500 mb-6 animate-bounce"></i>
+        <h2 class="text-2xl font-bold text-white mb-8 tracking-widest uppercase">Extracting Real Price</h2>
+        <div id="countdown-number" class="text-9xl font-black text-yellow-500 pulse-number">10</div>
+        <p class="text-gray-400 mt-8 text-lg font-medium">Scanning thousands of data points...</p>
+    </div>
+
+    <div id="main-content" class="container mx-auto px-4 py-8 hidden">
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="glass-panel p-6 rounded-lg flex items-center justify-center h-80 relative" id="res-img-box">
+                <div class="image-fallback"><i class="fa-solid fa-image"></i></div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-lg flex flex-col justify-between">
+                <div>
+                    <span id="res-store"
+                        class="inline-block bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wide">Store</span>
+                    <h1 id="res-title" class="text-xl font-bold mb-4 line-clamp-3">Loading Product...</h1>
+                    <div class="text-3xl font-extrabold text-green-600 mb-4" id="res-price">₹0</div>
+                </div>
+
+                <div class="flex gap-3">
+                    <a href="#" id="res-buy-btn" target="_blank"
+                        class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded text-center transition">Buy
+                        Now</a>
+                    <button id="share-copy"
+                        class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-4 rounded transition"><i
+                            class="fa-regular fa-copy"></i></button>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-lg flex flex-col justify-between">
+                <div>
+                    <h3 class="text-sm font-bold text-gray-500 uppercase mb-2">NeonMoney Verdict</h3>
+                    <div id="res-verdict" class="text-2xl font-black mb-1">Analyzing...</div>
+                    <p id="res-verdict-msg" class="text-sm text-gray-500 mb-6">Please wait</p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-gray-50 p-3 rounded border">
+                            <div class="text-xs text-gray-500 mb-1">Lowest Price</div>
+                            <div id="res-low" class="font-bold text-green-600 text-lg">₹0</div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded border">
+                            <div class="text-xs text-gray-500 mb-1">Highest Price</div>
+                            <div id="res-high" class="font-bold text-red-500 text-lg">₹0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t pt-4">
+                    <label class="text-sm font-bold text-gray-700 block mb-2">Set Price Drop Alert</label>
+                    <div class="flex">
+                        <input type="number" id="alert-price"
+                            class="flex-1 border rounded-l px-3 py-2 outline-none focus:border-green-500"
+                            placeholder="Target ₹">
+                        <button
+                            class="bg-green-500 text-white font-bold px-4 rounded-r hover:bg-green-600 transition">Set</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel p-6 rounded-lg mb-10">
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <h2 class="text-xl font-bold text-gray-800">Interactive Price History</h2>
+                <div class="flex bg-gray-100 rounded p-1" id="chart-tabs">
+                    <button data-days="3"
+                        class="px-3 py-1 text-sm font-bold rounded text-gray-500 hover:text-gray-800 tab-btn">3D</button>
+                    <button data-days="7"
+                        class="px-3 py-1 text-sm font-bold rounded text-gray-500 hover:text-gray-800 tab-btn">1W</button>
+                    <button data-days="30"
+                        class="px-3 py-1 text-sm font-bold rounded bg-white shadow text-gray-800 tab-btn active-tab">1M</button>
+                    <button data-days="90"
+                        class="px-3 py-1 text-sm font-bold rounded text-gray-500 hover:text-gray-800 tab-btn">3M</button>
+                    <button data-days="365"
+                        class="px-3 py-1 text-sm font-bold rounded text-gray-500 hover:text-gray-800 tab-btn">Max</button>
+                </div>
+            </div>
+            <div class="w-full h-80">
+                <canvas id="priceChart"></canvas>
+            </div>
+        </div>
+
+        <div>
+            <div class="flex items-center gap-3 mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Similar Products & Alternatives</h2>
+            </div>
+            <div id="similar-grid" class="grid grid-cols-2 md:grid-cols-5 gap-4">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- SEARCH BAR ANIMATION & LOGIC ---
+        const storesList = ["Amazon", "Flipkart", "Myntra", "Nykaa", "Meesho", "Ajio", "Snapdeal", "Tata Cliq", "JioMart", "BigBasket"];
+        let storeIndex = 0;
+        const searchInput = document.getElementById('main-search-bar');
+
+        setInterval(() => {
+            searchInput.placeholder = `Paste ${storesList[storeIndex]} link here...`;
+            storeIndex = (storeIndex + 1) % storesList.length;
+        }, 2000);
+
+        document.getElementById('main-search-btn').addEventListener('click', () => {
+            const pastedUrl = searchInput.value.trim();
+            if (pastedUrl) {
+                window.location.href = `analysis.html?url=${encodeURIComponent(pastedUrl)}`;
+            } else {
+                alert("Please paste a shopping link first!");
+            }
+        });
+
+        // --- CHART ENGINE ---
+        let chartInstance = null;
+        let basePrice = 0;
+
+        function generateHistoryData(days, currentPrice) {
+            const data = [];
+            const today = new Date();
+            for (let i = days; i >= 0; i--) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const randomSwing = currentPrice * (Math.random() * 0.05);
+                const isHigher = Math.random() > 0.5;
+                const pastPrice = isHigher ? currentPrice + randomSwing : currentPrice - randomSwing;
+                data.push({
+                    date: d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }),
+                    price: i === 0 ? currentPrice : Math.round(pastPrice)
+                });
+            }
+            return data;
+        }
+
+        function drawChart(days, currentPrice) {
+            const historyData = generateHistoryData(days, currentPrice);
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: historyData.map(h => h.date),
+                    datasets: [{
+                        data: historyData.map(h => h.price),
+                        borderColor: '#10B981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.3, borderWidth: 3
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('bg-white', 'shadow', 'text-gray-800', 'active-tab');
+                    b.classList.add('text-gray-500');
+                });
+                e.target.classList.remove('text-gray-500');
+                e.target.classList.add('bg-white', 'shadow', 'text-gray-800', 'active-tab');
+                drawChart(parseInt(e.target.getAttribute('data-days')), basePrice);
+            });
+        });
+
+        function getStoreInfo(url) {
+            const pUrl = url.toLowerCase();
+            if (pUrl.includes('amazon')) return { badge: 'Amazon', color: '#F59E0B' };
+            if (pUrl.includes('nykaa')) return { badge: 'Nykaa', color: '#EC4899' };
+            if (pUrl.includes('flipkart')) return { badge: 'Flipkart', color: '#2563EB' };
+            if (pUrl.includes('myntra')) return { badge: 'Myntra', color: '#EC4899' };
+            return { badge: 'Store', color: '#10B981' };
+        }
+
+        function renderSimilarProducts(products) {
+            const grid = document.getElementById('similar-grid');
+            grid.innerHTML = '';
+            if (!products || products.length === 0) {
+                grid.innerHTML = '<p class="text-gray-500 col-span-5">No other products in the database yet!</p>';
+                return;
+            }
+            products.forEach(p => {
+                grid.innerHTML += `
+                <a href="analysis.html?url=${p.url}" class="bg-white border rounded-lg p-3 hover:shadow-lg transition flex flex-col group">
+                    <div class="h-32 bg-gray-50 rounded mb-3 flex items-center justify-center overflow-hidden">
+                        <img src="${p.image}" class="max-h-full object-contain mix-blend-multiply group-hover:scale-105 transition">
+                    </div>
+                    <div class="text-xs font-medium text-gray-800 line-clamp-2 h-8 mb-2">${p.name}</div>
+                    <div class="mt-auto flex justify-between items-end">
+                        <span class="font-bold text-green-600">₹${p.price.toLocaleString('en-IN')}</span>
+                        <span class="text-[10px] text-gray-400 uppercase font-bold">${p.store}</span>
+                    </div>
+                </a>`;
+            });
+        }
+
+        // --- SCRAPING & COUNTDOWN LOGIC ---
+        const params = new URLSearchParams(window.location.search);
+        const targetUrl = params.get('url');
+
+        async function fetchRealData() {
+            if (!targetUrl) return; // Wait for user to use the search bar
+
+            const loader = document.getElementById('loading-overlay');
+            const mainContent = document.getElementById('main-content');
+            const countText = document.getElementById('countdown-number');
+
+            loader.classList.remove('hidden'); // Show the cinematic loader
+
+            let timeLeft = 10;
+            countText.textContent = timeLeft;
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft > 0) countText.textContent = timeLeft;
+                else { countText.textContent = "0"; clearInterval(timerInterval); }
+            }, 1000);
+
+            try {
+                const response = await fetch('http://localhost:3000/api/track-price', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ productUrl: targetUrl })
+                });
+
+                if (!response.ok) throw new Error("Backend failed");
+                const data = await response.json();
+                if (!data.success) throw new Error("Scraper failed");
+
+                const remainingWaitTime = Math.max(0, timeLeft * 1000);
+
+                setTimeout(() => {
+                    clearInterval(timerInterval);
+                    loader.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+
+                    const storeInfo = getStoreInfo(targetUrl);
+
+                    document.getElementById('res-store').textContent = storeInfo.badge;
+                    document.getElementById('res-title').textContent = data.title;
+                    document.getElementById('res-price').textContent = '₹' + data.currentPrice.toLocaleString('en-IN');
+
+                    const lowPrice = data.history?.lowest || data.currentPrice;
+                    const highPrice = data.history?.highest || data.currentPrice;
+
+                    document.getElementById('res-low').textContent = '₹' + lowPrice.toLocaleString('en-IN');
+                    document.getElementById('res-high').textContent = '₹' + highPrice.toLocaleString('en-IN');
+                    document.getElementById('res-img-box').innerHTML = `<img src="${data.imageUrl}" class="max-w-full max-h-full object-contain mix-blend-multiply">`;
+
+                    const buyBtn = document.getElementById('res-buy-btn');
+                    buyBtn.style.backgroundColor = storeInfo.color;
+                    buyBtn.href = targetUrl;
+
+                    const verdictEl = document.getElementById('res-verdict');
+                    if (data.currentPrice <= lowPrice) {
+                        verdictEl.textContent = "GREAT DEAL - BUY NOW";
+                        verdictEl.style.color = "#10B981";
+                        document.getElementById('res-verdict-msg').textContent = "Lowest price seen!";
+                    } else {
+                        verdictEl.textContent = "WAIT FOR DROP";
+                        verdictEl.style.color = "#F59E0B";
+                        document.getElementById('res-verdict-msg').textContent = `Higher than lowest recorded (₹${lowPrice}).`;
+                    }
+
+                    renderSimilarProducts(data.similarProducts);
+                    basePrice = data.currentPrice;
+                    drawChart(30, basePrice);
+
+                }, remainingWaitTime);
+
+            } catch (err) {
+                clearInterval(timerInterval);
+                loader.innerHTML = `
+                    <div class="text-center p-8 bg-gray-800 rounded-lg shadow border border-gray-700 max-w-md">
+                        <i class="fa-solid fa-triangle-exclamation text-red-500 text-5xl mb-4"></i>
+                        <h2 class="text-xl font-bold text-white mb-2">Scraping Failed</h2>
+                        <p class="text-gray-400 mb-6">Make sure your local Node.js server is running!</p>
+                    </div>`;
+            }
+        }
+
+        // Start the logic
+        fetchRealData();
+
+        // Copy link logic
+        document.getElementById('share-copy').addEventListener('click', () => {
+            navigator.clipboard.writeText(window.location.href);
+            alert("Link copied!");
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us — NeonMoney</title>
+    <meta name="description"
+        content="Get in touch with NeonMoney. Questions about coins, deals, or technical issues — we're here to help.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        .contact-hero {
+            padding: calc(var(--nav-height) + 70px) 0 60px;
+            text-align: center;
+        }
+
+        .contact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 100px;
+            padding: 6px 18px;
+            margin-bottom: 20px;
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: var(--neon-blue);
+        }
+
+        .contact-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            margin-bottom: 16px;
+        }
+
+        .contact-hero p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-section {
+            padding: 40px 0 100px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Info Cards */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-lg);
+            padding: 22px 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateX(4px);
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            flex-shrink: 0;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .info-text h4 {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            color: var(--neon-blue);
+            margin-bottom: 4px;
+        }
+
+        .info-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .info-text a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .info-text a:hover {
+            color: var(--neon-green);
+        }
+
+        .response-note {
+            background: rgba(0, 255, 178, 0.05);
+            border: 1px solid rgba(0, 255, 178, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 20px 22px;
+            margin-top: 8px;
+        }
+
+        .response-note p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .response-note strong {
+            color: var(--neon-green);
+        }
+
+        /* Form */
+        .contact-form-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+        }
+
+        .contact-form-card h2 {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.06em;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            letter-spacing: 0.06em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: all 0.25s;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--bg-card);
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 14px 24px;
+            font-size: 1rem;
+        }
+
+        /* Category pills */
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .cat-pill {
+            padding: 7px 14px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            font-family: var(--font-ui);
+        }
+
+        .cat-pill.active,
+        .cat-pill:hover {
+            background: rgba(59, 130, 246, 0.12);
+            border-color: rgba(59, 130, 246, 0.35);
+            color: var(--neon-blue);
+        }
+
+        /* Success state */
+        .form-success {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .form-success h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .form-success p {
+            color: var(--text-secondary);
+        }
+
+        /* FAQ link */
+        .faq-nudge {
+            text-align: center;
+            margin-top: 40px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-lg);
+            padding: 24px 20px;
+        }
+
+        .faq-nudge p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .faq-nudge a {
+            color: var(--neon-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .faq-nudge a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-card {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-auth-links" style="display:flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+                </div>
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contact-hero">
+        <div class="container">
+            <div class="contact-badge animate-on-scroll">📧 CONTACT US</div>
+            <h1 class="gradient-text animate-on-scroll">We're Here to Help</h1>
+            <p class="animate-on-scroll">Got a question about coins, deals, or a technical issue? Send us a message — we
+                usually reply within 24 hours.</p>
+        </div>
+    </div>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- LEFT: Info -->
+                <div class="contact-info animate-on-scroll">
+                    <div class="info-card">
+                        <div class="info-icon">📧</div>
+                        <div class="info-text">
+                            <h4>EMAIL US</h4>
+                            <p><a href="mailto:support@neonmoney.in">support@neonmoney.in</a></p>
+                            <p style="margin-top:4px; font-size:0.82rem; color:var(--text-muted);">For general support
+                            </p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⚖️</div>
+                        <div class="info-text">
+                            <h4>LEGAL / COMPLIANCE</h4>
+                            <p><a href="mailto:legal@neonmoney.in">legal@neonmoney.in</a></p>
+                            <p style="margin-top:4px; font-size:0.82rem; color:var(--text-muted);">For legal queries,
+                                DMCA, partnerships</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🐛</div>
+                        <div class="info-text">
+                            <h4>REPORT A BUG</h4>
+                            <p><a href="mailto:bugs@neonmoney.in">bugs@neonmoney.in</a></p>
+                            <p style="margin-top:4px; font-size:0.82rem; color:var(--text-muted);">Found something
+                                broken? Tell us!</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🤝</div>
+                        <div class="info-text">
+                            <h4>PARTNERSHIPS</h4>
+                            <p><a href="mailto:partners@neonmoney.in">partners@neonmoney.in</a></p>
+                            <p style="margin-top:4px; font-size:0.82rem; color:var(--text-muted);">Brand collaborations
+                                & integrations</p>
+                        </div>
+                    </div>
+                    <div class="response-note">
+                        <p>⏱️ <strong>Response Time:</strong> We typically reply within <strong>24 hours</strong> on
+                            weekdays. Complex issues like missing coins may take up to <strong>3 business days</strong>
+                            to resolve.</p>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Form -->
+                <div class="contact-form-card animate-on-scroll">
+                    <h2>✉️ SEND US A MESSAGE</h2>
+
+                    <!-- Category pills -->
+                    <div class="category-pills" id="category-pills">
+                        <div class="cat-pill active" data-cat="general">💬 General</div>
+                        <div class="cat-pill" data-cat="coins">💰 Coins Issue</div>
+                        <div class="cat-pill" data-cat="deals">🔥 Deals</div>
+                        <div class="cat-pill" data-cat="account">👤 Account</div>
+                        <div class="cat-pill" data-cat="bug">🐛 Bug Report</div>
+                        <div class="cat-pill" data-cat="other">📋 Other</div>
+                    </div>
+
+                    <div id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Name *</label>
+                                <input type="text" id="c-name" placeholder="Aryan Mehta" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address *</label>
+                                <input type="email" id="c-email" placeholder="you@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Subject *</label>
+                            <input type="text" id="c-subject" placeholder="My coins are not credited after purchase"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Order / Transaction ID (if applicable)</label>
+                            <input type="text" id="c-orderid" placeholder="Optional — helps us resolve faster">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Message *</label>
+                            <textarea id="c-message"
+                                placeholder="Describe your issue or question in detail. The more info you provide, the faster we can help!"
+                                maxlength="1000" oninput="updateCount(this)"></textarea>
+                            <div class="char-count"><span id="char-count">0</span>/1000</div>
+                        </div>
+
+                        <button class="btn btn-primary btn-ripple submit-btn" onclick="submitForm()">
+                            🚀 Send Message
+                        </button>
+                    </div>
+
+                    <div class="form-success" id="form-success">
+                        <div class="success-icon">✅</div>
+                        <h3 class="gradient-text">Message Received!</h3>
+                        <p>Thanks for reaching out. We've received your message and will reply to <strong
+                                id="reply-email"></strong> within 24 hours.</p>
+                        <br>
+                        <a href="index.html" class="btn btn-secondary" style="margin-top:16px;">← Back to Home</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-nudge animate-on-scroll">
+                <p>💡 Before sending, check our <a href="faq.html">FAQ page</a> — your question about coins, pending
+                    rewards, or how the platform works might already be answered there!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo" style="margin-bottom:12px; display:inline-flex;">
+                        <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+                    </a>
+                    <p>We help users save money by finding the best deals and rewarding them with coins for smart
+                        shopping.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4><a href="deals.html">All Deals</a><a href="store.html">Stores</a><a
+                        href="rewards.html">Rewards</a><a href="dashboard.html">Dashboard</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html"
+                        style="color:var(--neon-blue);">Contact Us</a><a href="about.html">About Us</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &
+                        Conditions</a><a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 NeonMoney. All rights reserved.</p>
+                <p>We earn through affiliate links. <a href="disclaimer.html"
+                        style="color:var(--neon-green);text-decoration:none;">Read Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Category pills
+        document.querySelectorAll('.cat-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                // Auto-fill subject hint
+                const hints = {
+                    coins: 'My coins are not credited after purchase',
+                    deals: 'Deal price seems incorrect',
+                    account: 'I cannot log in to my account',
+                    bug: 'Found a bug — [describe briefly]',
+                    general: 'General question about NeonMoney',
+                    other: ''
+                };
+                const subj = document.getElementById('c-subject');
+                if (!subj.value || Object.values(hints).includes(subj.value)) {
+                    subj.value = hints[pill.dataset.cat] || '';
+                }
+            });
+        });
+
+        function updateCount(el) {
+            document.getElementById('char-count').textContent = el.value.length;
+        }
+
+        function submitForm() {
+            const name = document.getElementById('c-name').value.trim();
+            const email = document.getElementById('c-email').value.trim();
+            const subject = document.getElementById('c-subject').value.trim();
+            const message = document.getElementById('c-message').value.trim();
+
+            if (!name || !email || !subject || !message) {
+                if (typeof showNotification === 'function') {
+                    showNotification('⚠️ Please fill all required fields', 'error');
+                } else {
+                    alert('Please fill all required fields.');
+                }
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                if (typeof showNotification === 'function') {
+                    showNotification('⚠️ Please enter a valid email address', 'error');
+                } else {
+                    alert('Please enter a valid email.');
+                }
+                return;
+            }
+
+            // Demo: show success
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('reply-email').textContent = email;
+            document.getElementById('form-success').style.display = 'block';
+        }
+    </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNXh2aPjvZcWceDxCuMNzJegJ3RKwNsx0",
+            authDomain: "neonmoney-a2d18.firebaseapp.com",
+            projectId: "neonmoney-a2d18",
+            storageBucket: "neonmoney-a2d18.firebasestorage.app",
+            messagingSenderId: "759618988071",
+            appId: "1:759618988071:web:b65d190a3a7ececabc4602"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // Show real coins if logged in
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                const navCoinDisplay = document.getElementById('nav-coins-val');
+
+                // Hide auth links, show user menu
+                document.getElementById('nav-auth-links').style.display = 'none';
+                document.getElementById('nav-user-menu').style.display = 'flex';
+                document.getElementById('nav-coins').style.display = 'block';
+
+                let currentCoins = 0;
+                if (userSnap.exists()) {
+                    currentCoins = userSnap.data().coins;
+                } else {
+                    currentCoins = parseInt(localStorage.getItem('neon_coins')) || 0;
+                }
+
+                if (navCoinDisplay) navCoinDisplay.textContent = currentCoins.toLocaleString('en-IN');
+            }
+        });
+
+        // Logout logic
+        const logoutBtns = document.querySelectorAll('.btn-logout');
+        logoutBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                signOut(auth).then(() => {
+                    window.location.href = 'login.html';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

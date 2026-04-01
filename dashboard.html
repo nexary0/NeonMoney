@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — NeonMoney 💸</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="Neon Money Logo" style="height: 40px; width: auto;">
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-auth-links" style="display:flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+                </div>
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+    <div class="bg-mesh"></div>
+    <div class="bg-noise"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="NeonMoney Logo"
+                    style="height: 36px; width: auto; margin-right: 8px; border-radius: 8px;">
+                Neon<span class="accent">Money</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-user-menu" style="display:flex; gap:8px; align-items:center;">
+                    <button class="btn btn-secondary btn-sm btn-logout" id="logout-btn">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <a href="dashboard.html" class="sidebar-link active"><span class="sidebar-icon">🏠</span> Dashboard</a>
+            <a href="rewards.html" class="sidebar-link"><span class="sidebar-icon">💰</span> My Coins</a>
+            <a href="rewards.html" class="sidebar-link"><span class="sidebar-icon">🎁</span> Rewards</a>
+            <a href="deals.html" class="sidebar-link"><span class="sidebar-icon">🔥</span> Deals</a>
+
+            <div class="sidebar-section-label">Activity</div>
+            <a href="alerts.html" class="sidebar-link"><span class="sidebar-icon">🔔</span> Alerts <span
+                    class="sidebar-badge">3</span></a>
+            <a href="history.html" class="sidebar-link"><span class="sidebar-icon">📋</span> History</a>
+            <a href="wishlist.html" class="sidebar-link"><span class="sidebar-icon">⭐</span> Wishlist</a>
+
+            <div class="sidebar-section-label">Account</div>
+            <a href="profile.html" class="sidebar-link"><span class="sidebar-icon">👤</span> Profile</a>
+            <a href="faq.html" class="sidebar-link"><span class="sidebar-icon">❓</span> Help</a>
+            <button class="sidebar-link btn-logout" id="sidebar-logout-btn"
+                style="background:none;border:none;cursor:pointer;color:var(--text-muted);text-align:left;width:100%;"><span
+                    class="sidebar-icon">🚪</span> Logout</button>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="dashboard-main">
+
+            <!-- Header -->
+            <div class="dashboard-header">
+                <h2>Welcome, <span id="user-name-display">Demo User</span> 👋</h2>
+                <p>You've been saving since January 2026. Keep it up!</p>
+            </div>
+
+            <!-- Coins Hero -->
+            <div class="coins-hero animate-on-scroll">
+                <div>
+                    <div class="coins-label">TOTAL COINS</div>
+                    <div class="coins-total glow-text-green" id="user-coin-balance">...</div>
+                    <div style="margin-top:8px;">
+                        <span class="badge badge-green">🟢 Active Streak: 7 Days</span>
+                    </div>
+                </div>
+                <div class="coins-breakdown">
+                    <div class="coin-item confirmed">
+                        <div class="coin-item-val">0</div>
+                        <div class="coin-item-label">Confirmed</div>
+                    </div>
+                    <div class="coin-item pending">
+                        <div class="coin-item-val">0</div>
+                        <div class="coin-item-label">Pending</div>
+                    </div>
+                    <div class="coin-item expired">
+                        <div class="coin-item-val">0</div>
+                        <div class="coin-item-label">Expiring Soon</div>
+                    </div>
+                </div>
+                <div>
+                    <a href="rewards.html" class="btn btn-primary btn-ripple">🎁 Redeem Coins</a>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="qstat-card animate-on-scroll delay-1">
+                    <div class="qstat-top"><span class="qstat-icon">💸</span><span class="qstat-change up">+12%</span>
+                    </div>
+                    <div class="qstat-val green-text">₹0</div>
+                    <div class="qstat-name">Total Saved</div>
+                </div>
+                <div class="qstat-card animate-on-scroll delay-2">
+                    <div class="qstat-top"><span class="qstat-icon">🛒</span><span class="qstat-change up">+3</span>
+                    </div>
+                    <div class="qstat-val">0</div>
+                    <div class="qstat-name">Deals Used</div>
+                </div>
+                <div class="qstat-card animate-on-scroll delay-3">
+                    <div class="qstat-top"><span class="qstat-icon">🎰</span><span class="qstat-change up">+7</span>
+                    </div>
+                    <div class="qstat-val">0</div>
+                    <div class="qstat-name">Day Streak</div>
+                </div>
+                <div class="qstat-card animate-on-scroll delay-4">
+                    <div class="qstat-top"><span class="qstat-icon">🎁</span><span class="qstat-change">~</span></div>
+                    <div class="qstat-val">0</div>
+                    <div class="qstat-name">Rewards Redeemed</div>
+                </div>
+            </div>
+
+            <!-- Two Column -->
+            <div class="grid-2" style="gap:24px; margin-bottom:32px;">
+
+                <!-- Daily Spin -->
+                <div class="spin-section glass-card animate-on-scroll">
+                    <h3 style="font-family:var(--font-body); font-size:1.1rem; font-weight:700; margin-bottom:4px;">🎰
+                        Daily Spin</h3>
+                    <p style="font-size:0.85rem; margin-bottom:0;">Win coins every day</p>
+                    <div class="spin-wheel-wrap">
+                        <div class="spin-outer-ring"></div>
+                        <div class="spin-pointer">▼</div>
+                        <svg id="spin-wheel-svg" class="spin-wheel-svg" viewBox="0 0 220 220"
+                            xmlns="http://www.w3.org/2000/svg"></svg>
+                    </div>
+                    <button id="spin-btn-main" class="btn btn-primary btn-ripple" style="width:100%;">🎰 Spin
+                        Now!</button>
+                    <div id="spin-timer" class="spin-timer">Daily spin · Resets at midnight</div>
+                </div>
+
+                <!-- Streak -->
+                <div class="glass-card animate-on-scroll delay-2" style="padding:28px;">
+                    <h3 style="font-family:var(--font-body); font-size:1.1rem; font-weight:700; margin-bottom:4px;">🔥
+                        Your Streak</h3>
+                    <p style="font-size:0.85rem; margin-bottom:20px;">Come back daily for bonus coins</p>
+                    <div class="streak-row">
+                        <div class="streak-day done"><span class="day-dot">✓</span><span>Mon</span></div>
+                        <div class="streak-day done"><span class="day-dot">✓</span><span>Tue</span></div>
+                        <div class="streak-day done"><span class="day-dot">✓</span><span>Wed</span></div>
+                        <div class="streak-day done"><span class="day-dot">✓</span><span>Thu</span></div>
+                        <div class="streak-day done"><span class="day-dot">✓</span><span>Fri</span></div>
+                        <div class="streak-day done"><span class="day-dot">✓</span><span>Sat</span></div>
+                        <div class="streak-day today"><span class="day-dot">🔥</span><span>Sun</span></div>
+                    </div>
+                    <div
+                        style="margin-top:20px; padding:16px; background:rgba(0,255,178,0.06); border:1px solid rgba(0,255,178,0.15); border-radius:var(--radius-md);">
+                        <div
+                            style="font-family:var(--font-display); font-size:0.75rem; color:var(--text-muted); margin-bottom:4px;">
+                            STREAK REWARD</div>
+                        <div
+                            style="font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:var(--neon-green);">
+                            +50 Bonus Coins</div>
+                        <div style="font-size:0.78rem; color:var(--text-muted); font-family:var(--font-ui);">Claim at
+                            10-day milestone</div>
+                    </div>
+                    <div
+                        style="margin-top:12px; text-align:center; font-family:var(--font-ui); font-size:0.82rem; color:var(--text-muted);">
+                        3 more days for milestone bonus 🏆</div>
+                </div>
+            </div>
+
+            <!-- Price Alerts -->
+            <div class="glass-card animate-on-scroll" style="padding:28px; margin-bottom:24px;">
+                <div class="flex-between" style="margin-bottom:20px;">
+                    <h3 style="font-family:var(--font-body); font-weight:700;">🔔 Price Alerts</h3>
+                    <a href="#" class="btn btn-secondary btn-sm">Manage Alerts</a>
+                </div>
+                <div id="dash-alerts" style="display:flex;flex-direction:column;gap:12px;">
+                    <div class="alert-box alert-warning alert-pulse">
+                        <span style="font-size:1.2rem;">⚠️</span>
+                        <div>
+                            <div
+                                style="font-weight:600;font-size:0.9rem;color:var(--text-primary);font-family:var(--font-ui);">
+                                Sony WH-1000XM5</div>
+                            <div style="font-size:0.82rem;color:var(--text-secondary);font-family:var(--font-ui);">Save
+                                ₹1,491 on Flipkart if you wait 2 days</div>
+                        </div>
+                        <a href="deals.html" class="btn btn-secondary btn-sm"
+                            style="margin-left:auto;flex-shrink:0;">View</a>
+                    </div>
+                    <div class="alert-box" style="background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.2);">
+                        <span style="font-size:1.2rem;">💡</span>
+                        <div>
+                            <div
+                                style="font-weight:600;font-size:0.9rem;color:var(--text-primary);font-family:var(--font-ui);">
+                                Nike Air Max 270</div>
+                            <div style="font-size:0.82rem;color:var(--text-secondary);font-family:var(--font-ui);">₹996
+                                cheaper on Flipkart right now</div>
+                        </div>
+                        <a href="deals.html" class="btn btn-primary btn-sm" style="margin-left:auto;flex-shrink:0;">Buy
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="glass-card animate-on-scroll" style="padding:28px;">
+                <div class="flex-between" style="margin-bottom:20px;">
+                    <h3 style="font-family:var(--font-body); font-weight:700;">📋 Coin History</h3>
+                    <a href="rewards.html" class="btn btn-secondary btn-sm">View All</a>
+                </div>
+                <div>
+                </div class="flex-between" style="margin-bottom:20px;">
+                <h3 style="font-family:var(--font-body); font-weight:700;">📜 Coin History</h3>
+                <a href="rewards.html" class="btn btn-secondary btn-sm">View All</a>
+            </div>
+            <div>
+                <div
+                    style="text-align: center; padding: 40px 20px; color: var(--text-muted); background: var(--bg-card); border-radius: var(--radius-md); border: 1px dashed var(--border);">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">🛒</span>
+                    <p>No recent activity. Start shopping to earn coins!</p>
+                </div>
+            </div>
+    </div>
+    </div>
+
+    </main>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="spin.js"></script>
+    <script src="alerts.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNXh2aPjvZcWceDxCuMNzJegJ3RKwNsx0",
+            authDomain: "neonmoney-a2d18.firebaseapp.com",
+            projectId: "neonmoney-a2d18",
+            storageBucket: "neonmoney-a2d18.firebasestorage.app",
+            messagingSenderId: "759618988071",
+            appId: "1:759618988071:web:b65d190a3a7ececabc4602"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // 1. Show Real Name
+                let displayName = user.email.split('@')[0];
+                displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+                const nameDisplay = document.getElementById('user-name-display');
+                if (nameDisplay) nameDisplay.textContent = displayName;
+
+                // 2. Fetch Live Coins
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                const balanceDisplay = document.getElementById('user-coin-balance');
+                const navCoinDisplay = document.getElementById('nav-coins-val');
+
+                let currentCoins = 0;
+                if (userSnap.exists()) {
+                    currentCoins = userSnap.data().coins;
+                } else {
+                    // New user setup
+                    await setDoc(userRef, { email: user.email, coins: 50, joinedAt: new Date() });
+                    currentCoins = 50;
+                }
+
+                if (balanceDisplay) balanceDisplay.textContent = currentCoins;
+                if (navCoinDisplay) navCoinDisplay.textContent = currentCoins.toLocaleString('en-IN');
+
+                // === NEW: THE SPIN WHEEL BRIDGE ===
+                // This allows spin.js to send won coins directly to Firebase!
+                window.addSpinCoinsToDatabase = async function (wonAmount) {
+                    // Do the math: Old balance + Spin Win = New Balance
+                    const newTotal = currentCoins + wonAmount;
+                    currentCoins = newTotal;
+
+                    // Instantly update the screen (NO REFRESH NEEDED!)
+                    if (balanceDisplay) balanceDisplay.textContent = newTotal;
+                    if (navCoinDisplay) navCoinDisplay.textContent = newTotal.toLocaleString('en-IN');
+
+                    // Save it permanently to the database
+                    await setDoc(userRef, { coins: newTotal }, { merge: true });
+                };
+
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // 3. Setup Logout Buttons
+        const logoutBtns = document.querySelectorAll('.btn-logout');
+        logoutBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                signOut(auth).then(() => {
+                    window.location.href = 'login.html';
+                });
+            });
+        });
+    </script>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+
+</body>
+
+</html>

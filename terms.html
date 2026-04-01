@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions — NeonMoney</title>
+    <meta name="description"
+        content="Read NeonMoney's Terms & Conditions. Understand how our coin rewards, affiliate links, and platform work.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .legal-hero {
+            padding: calc(var(--nav-height) + 60px) 0 60px;
+            text-align: center;
+        }
+
+        .legal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            border-radius: 100px;
+            padding: 6px 18px;
+            margin-bottom: 20px;
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: var(--neon-purple);
+        }
+
+        .legal-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            margin-bottom: 14px;
+        }
+
+        .legal-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .legal-body {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 20px 100px;
+        }
+
+        .legal-toc {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-lg);
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+
+        .legal-toc h3 {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--neon-purple);
+            margin-bottom: 16px;
+            letter-spacing: 0.08em;
+        }
+
+        .legal-toc ol {
+            padding-left: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .legal-toc li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .legal-toc li a:hover {
+            color: var(--neon-purple);
+        }
+
+        .legal-section {
+            margin-bottom: 48px;
+        }
+
+        .legal-section h2 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            letter-spacing: 0.06em;
+            color: var(--neon-purple);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legal-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+        }
+
+        .legal-section ul,
+        .legal-section ol {
+            padding-left: 22px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .legal-section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background: rgba(124, 58, 237, 0.08);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-primary) !important;
+        }
+
+        .warn-box {
+            background: rgba(255, 107, 107, 0.08);
+            border: 1px solid rgba(255, 107, 107, 0.25);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            margin: 20px 0;
+        }
+
+        .warn-box p {
+            margin: 0;
+            color: #FF6B6B !important;
+        }
+
+        @media (max-width: 600px) {
+            .legal-toc ol {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-auth-links" style="display:flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+                </div>
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="legal-hero">
+        <div class="container">
+            <div class="legal-badge">⚖️ LEGAL</div>
+            <h1 class="gradient-text">Terms &amp; Conditions</h1>
+            <p class="legal-meta">Last updated: January 1, 2025 &nbsp;·&nbsp; Effective immediately upon use</p>
+        </div>
+    </div>
+
+    <div class="legal-body">
+
+        <div class="legal-toc animate-on-scroll">
+            <h3>📋 TABLE OF CONTENTS</h3>
+            <ol>
+                <li><a href="#acceptance">Acceptance of Terms</a></li>
+                <li><a href="#platform">What We Do</a></li>
+                <li><a href="#affiliate">Affiliate Disclosure</a></li>
+                <li><a href="#coins">Coin Rewards System</a></li>
+                <li><a href="#eligibility">User Eligibility</a></li>
+                <li><a href="#account">Account Responsibilities</a></li>
+                <li><a href="#prohibited">Prohibited Use</a></li>
+                <li><a href="#liability">Limitation of Liability</a></li>
+                <li><a href="#changes">Changes to Terms</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ol>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="acceptance">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using NeonMoney ("we", "our", "us", "the platform"), you agree to be bound by these Terms
+                & Conditions. If you do not agree to these terms, please do not use our platform.</p>
+            <p>These terms apply to all visitors, users, and others who access or use the service.</p>
+            <div class="highlight-box">
+                <p>💡 Using NeonMoney means you have read, understood, and agreed to these terms. These terms form a
+                    legally binding agreement between you and NeonMoney.</p>
+            </div>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="platform">
+            <h2>2. What We Do</h2>
+            <p>NeonMoney is a price comparison and deal discovery platform. We help users:</p>
+            <ul>
+                <li>Compare product prices across Amazon, Flipkart, and other e-commerce platforms</li>
+                <li>Discover current deals and discounts</li>
+                <li>Earn virtual "coins" for clicking affiliate links and making purchases through our platform</li>
+                <li>Redeem earned coins for rewards like gift cards and mobile recharges</li>
+            </ul>
+            <div class="warn-box">
+                <p>⚠️ <strong>Important:</strong> NeonMoney does NOT sell products directly. We are a comparison and
+                    affiliate platform only. All purchases happen on third-party platforms (Amazon, Flipkart, etc.).</p>
+            </div>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="affiliate">
+            <h2>3. Affiliate Disclosure</h2>
+            <p>NeonMoney participates in affiliate marketing programs. When you click a link on our platform and make a
+                purchase, we may earn a commission from the retailer at no extra cost to you.</p>
+            <ul>
+                <li>We are participants in the Amazon Associates Programme and Flipkart Affiliate Programme</li>
+                <li>Commissions earned help us maintain the platform and fund the coin rewards system</li>
+                <li>Our price comparisons and deal recommendations are based on publicly available data</li>
+                <li>We are NOT directly affiliated with or endorsed by Amazon or Flipkart</li>
+                <li>Prices shown may vary; always verify the final price on the retailer's website before purchase</li>
+            </ul>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="coins">
+            <h2>4. Coin Rewards System</h2>
+            <p>NeonMoney's coin system allows users to earn virtual coins and redeem them for rewards. Please read the
+                following carefully:</p>
+
+            <h3 style="color:var(--text-primary);font-size:1rem;margin:20px 0 10px;">4.1 Earning Coins</h3>
+            <ul>
+                <li>Coins are awarded when you click affiliate links from our platform AND complete a qualifying
+                    purchase</li>
+                <li>Coins are initially shown as <strong>"Pending"</strong> — they become "Confirmed" only after the
+                    return/refund window has passed (typically 7–30 days depending on the retailer)</li>
+                <li>Coins are virtual rewards and have no monetary value outside the NeonMoney rewards system</li>
+                <li>Daily Spin Wheel coins are credited immediately and do not require a purchase</li>
+            </ul>
+
+            <h3 style="color:var(--text-primary);font-size:1rem;margin:20px 0 10px;">4.2 Coin Limitations</h3>
+            <ul>
+                <li><strong>Coins are NOT guaranteed instantly.</strong> Purchase verification takes time.</li>
+                <li>Coins may be reversed if a purchase is returned or cancelled</li>
+                <li>Coins expire 12 months from the date of issue if not redeemed</li>
+                <li>NeonMoney reserves the right to adjust, suspend, or terminate the coin program at any time</li>
+                <li>Fraudulent activity (fake orders, click fraud, etc.) will result in immediate account termination
+                    and forfeiture of all coins</li>
+            </ul>
+
+            <div class="warn-box">
+                <p>⚠️ <strong>Coins are not cash.</strong> They cannot be transferred, sold, or exchanged for real money
+                    directly. They can only be redeemed for the specific rewards listed on the Rewards page.</p>
+            </div>
+
+            <h3 style="color:var(--text-primary);font-size:1rem;margin:20px 0 10px;">4.3 Redeeming Coins</h3>
+            <ul>
+                <li>Only Confirmed coins can be redeemed (Pending coins cannot)</li>
+                <li>Minimum redemption thresholds apply (shown on the Rewards page)</li>
+                <li>Redemption is subject to availability and may take 2–5 business days to process</li>
+            </ul>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="eligibility">
+            <h2>5. User Eligibility</h2>
+            <p>To use NeonMoney, you must:</p>
+            <ul>
+                <li>Be at least 18 years of age, or 13 years old with parental consent</li>
+                <li>Be a resident of India</li>
+                <li>Have a valid email address</li>
+                <li>Not be previously banned from NeonMoney</li>
+            </ul>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="account">
+            <h2>6. Account Responsibilities</h2>
+            <p>You are responsible for:</p>
+            <ul>
+                <li>Maintaining the confidentiality of your account credentials</li>
+                <li>All activities that occur under your account</li>
+                <li>Providing accurate and truthful information during signup</li>
+                <li>Notifying us immediately of any unauthorized use of your account</li>
+            </ul>
+            <p>One person may only hold one NeonMoney account. Creating multiple accounts to abuse the rewards system is
+                prohibited and will result in a permanent ban.</p>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="prohibited">
+            <h2>7. Prohibited Use</h2>
+            <p>You may NOT use NeonMoney to:</p>
+            <ul>
+                <li>Artificially inflate coin earnings through click fraud, bots, or automation</li>
+                <li>Create fake purchases to earn coins and then return the items</li>
+                <li>Share, sell, or transfer your account or coins to another person</li>
+                <li>Attempt to reverse-engineer, scrape, or duplicate our platform</li>
+                <li>Harass, spam, or harm other users</li>
+                <li>Violate any applicable Indian or international laws</li>
+            </ul>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="liability">
+            <h2>8. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by applicable law:</p>
+            <ul>
+                <li>NeonMoney provides the platform "as is" without warranties of any kind</li>
+                <li>We are not liable for price inaccuracies (prices on retailer sites may change without notice)</li>
+                <li>We are not responsible for any transactions, disputes, or issues arising from purchases made on
+                    third-party platforms</li>
+                <li>Our total liability to you for any claim shall not exceed the value of coins in your account at the
+                    time of the claim</li>
+                <li>We are not responsible for service interruptions, data loss, or technical errors</li>
+            </ul>
+            <p>For product issues, refunds, or delivery complaints — please contact the retailer (Amazon/Flipkart)
+                directly.</p>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="changes">
+            <h2>9. Changes to Terms</h2>
+            <p>We reserve the right to modify these terms at any time. Changes will be posted on this page with an
+                updated "Last updated" date. Continued use of the platform after changes constitutes your acceptance of
+                the new terms.</p>
+            <p>For significant changes, we will notify you via email (if you have an account) or via a notice on the
+                homepage.</p>
+        </div>
+
+        <div class="legal-section animate-on-scroll" id="contact">
+            <h2>10. Contact Us</h2>
+            <p>If you have questions about these Terms & Conditions, please reach out:</p>
+            <ul>
+                <li>📧 Email: <a href="mailto:legal@neonmoney.in"
+                        style="color:var(--neon-green);">legal@neonmoney.in</a></li>
+                <li>📝 Contact Form: <a href="contact.html" style="color:var(--neon-green);">contact.html</a></li>
+            </ul>
+            <p>Governing law: These terms are governed by the laws of India. Any disputes will be subject to the
+                jurisdiction of courts in India.</p>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo" style="margin-bottom:12px; display:inline-flex;">
+                        <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+                    </a>
+                    <p>We help users save money by finding the best deals and rewarding them with coins for smart
+                        shopping.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4><a href="deals.html">All Deals</a><a href="store.html">Stores</a><a
+                        href="rewards.html">Rewards</a><a href="dashboard.html">Dashboard</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a
+                        href="about.html">About Us</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html"
+                        style="color:var(--neon-purple);">Terms & Conditions</a><a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 NeonMoney. All rights reserved.</p>
+                <p>We earn through affiliate links. <a href="disclaimer.html"
+                        style="color:var(--neon-green);text-decoration:none;">Read Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

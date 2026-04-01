@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Deals Radar | NeonMoney PRO</title>
+
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        /* Premium Header */
+        .deals-hero {
+            padding: calc(var(--nav-height) + 40px) 0 30px;
+            text-align: center;
+        }
+
+        .pro-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #FFD700, #F5A623);
+            color: #000;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 100px;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        /* PRO Subscription Up-sell Banner */
+        .pro-banner {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.8));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 0 auto 50px;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pro-banner::before {
+            content: '👑';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.05;
+            right: -20px;
+            bottom: -40px;
+        }
+
+        .pro-plans {
+            display: flex;
+            gap: 15px;
+        }
+
+        .plan-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .plan-card:hover {
+            border-color: #FFD700;
+            transform: translateY(-3px);
+        }
+
+        .plan-price {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        /* Filter System */
+        .filter-tabs {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 10px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: rgba(0, 255, 178, 0.15);
+            border-color: rgba(0, 255, 178, 0.4);
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        /* Live Radar Grid */
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            padding-bottom: 80px;
+        }
+
+        .deal-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .deal-card:hover {
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
+        }
+
+        .deal-card.flash {
+            border-color: rgba(255, 51, 0, 0.3);
+            background: linear-gradient(180deg, rgba(255, 51, 0, 0.05), rgba(15, 23, 42, 0.9));
+        }
+
+        .deal-card.flash:hover {
+            border-color: #ff3300;
+            box-shadow: 0 10px 30px rgba(255, 51, 0, 0.15);
+        }
+
+        /* 🔒 PRO LOCKED DEAL CARD STYLES */
+        .deal-card.locked-pro {
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+        }
+
+        .locked-content {
+            filter: blur(8px);
+            opacity: 0.4;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .lock-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+        }
+
+        .lock-icon {
+            font-size: 3.5rem;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+
+        .deal-img-box {
+            width: 100%;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff3300;
+            color: #fff;
+            font-weight: 900;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(255, 51, 0, 0.4);
+        }
+
+        .timer-box {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .deal-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .deal-prices {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .new-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .old-price {
+            font-size: 1rem;
+            color: #64748b;
+            text-decoration: line-through;
+        }
+
+        .store-tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .store-tag.amazon {
+            background: rgba(255, 153, 0, 0.1);
+            color: #FF9900;
+        }
+
+        .store-tag.flipkart {
+            background: rgba(40, 116, 240, 0.1);
+            color: #2874F0;
+        }
+
+        .earn-pill {
+            background: rgba(0, 255, 178, 0.1);
+            border: 1px solid rgba(0, 255, 178, 0.2);
+            color: var(--neon-green);
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: auto;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .pro-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+
+            .pro-plans {
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+
+            <a href="index.html" class="nav-logo"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                <img src="logo.png" alt="" style="height: 36px; width: 36px; border-radius: 8px; object-fit: cover;">
+                <span
+                    style="color: #fff; font-weight: bold; font-size: 1.4rem; font-family: var(--font-display, sans-serif);">Neon<span
+                        style="color: var(--neon-green);">Money</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html" class="active">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-auth-links" style="display:flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+                </div>
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="deals-hero">
+        <div class="container">
+            <div class="pro-badge animate-on-scroll">NEONMONEY PRO</div>
+            <h1 class="gradient-text animate-on-scroll"
+                style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 16px;">Live Price Radar</h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto 40px;"
+                class="animate-on-scroll">Our bots scan Amazon, Flipkart, and 50+ stores 24/7 to catch massive price
+                drops before they sell out.</p>
+
+            <div class="pro-banner animate-on-scroll">
+                <div style="text-align: left; z-index: 1;">
+                    <h2 style="font-family: var(--font-display); color: #fff; font-size: 1.8rem; margin-bottom: 8px;">
+                        Unlock <span style="color: #FFD700;">PRO</span> Alerts</h2>
+                    <p style="color: #cbd5e1; font-size: 0.95rem; max-width: 400px;">Free users see deals 3 hours late.
+                        Upgrade to PRO for instant SMS alerts, Secret Error Deals, and <strong
+                            style="color:var(--neon-green)">2x Coin Rewards</strong> on every purchase!</p>
+                </div>
+                <div class="pro-plans" style="z-index: 1;">
+                    <div class="plan-card" onclick="alert('Payment Gateway Integration Required!')">
+                        <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase;">Weekly Pass</div>
+                        <div class="plan-price">₹99</div>
+                        <div style="font-size: 0.75rem; color: var(--neon-green); margin-top: 4px;">Billed Weekly</div>
+                    </div>
+                    <div class="plan-card" style="border-color: #FFD700; background: rgba(255,215,0,0.1);"
+                        onclick="alert('Payment Gateway Integration Required!')">
+                        <div style="font-size: 0.8rem; color: #FFD700; text-transform: uppercase; font-weight: bold;">
+                            Monthly Pro</div>
+                        <div class="plan-price">₹199</div>
+                        <div style="font-size: 0.75rem; color: var(--neon-green); margin-top: 4px;">Save 50%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-tabs animate-on-scroll">
+                <button class="filter-btn active" onclick="filterDeals('all', this)">⚡ All Live Deals</button>
+                <button class="filter-btn" onclick="filterDeals('flash', this)">🔥 Flash Sales</button>
+                <button class="filter-btn" onclick="filterDeals('electronics', this)">💻 Electronics</button>
+                <button class="filter-btn" onclick="filterDeals('fashion', this)">👟 Fashion</button>
+                <button class="filter-btn" onclick="filterDeals('finance', this)">💳 Finance</button>
+            </div>
+
+            <div class="deals-grid">
+
+                <div class="deal-card locked-pro animate-on-scroll" data-category="flash electronics">
+                    <div class="lock-overlay">
+                        <div class="lock-icon">🔒</div>
+                        <h3
+                            style="font-family: var(--font-display); font-size: 1.5rem; color: #FFD700; margin-bottom: 8px;">
+                            PRO EXCLUSIVE</h3>
+                        <p style="font-size: 0.9rem; color: #fff; margin-bottom: 20px;">Massive Error Price Drop! 85%
+                            OFF.</p>
+                        <a href="pro.html" class="btn btn-primary"
+                            style="background: linear-gradient(90deg, #FFD700, #F5A623); color: #000; font-weight: 900; border: none; text-decoration: none;">Subscribe
+                            to Unlock ↗</a>
+                    </div>
+
+                    <div class="locked-content">
+                        <div class="deal-img-box">💻<div class="discount-badge">↓ 85% OFF</div>
+                        </div>
+                        <div>
+                            <div class="store-tag amazon">🛒 Amazon</div>
+                            <h3 class="deal-title">Secret Gaming Laptop Deal</h3>
+                            <div class="deal-prices">
+                                <div class="new-price">₹??,???</div>
+                                <div class="old-price">₹1,20,000</div>
+                            </div>
+                        </div>
+                        <div class="earn-pill">🎁 Earn 2x Coins</div>
+                        <button class="btn btn-primary" style="width: 100%;">Grab Deal Now</button>
+                    </div>
+                </div>
+
+                <div class="deal-card flash animate-on-scroll" data-category="flash electronics">
+                    <div class="deal-img-box">
+                        📱
+                        <div class="discount-badge">↓ 32% OFF</div>
+                        <div class="timer-box countdown" data-hours="4" data-minutes="12" data-seconds="59">04:12:59
+                        </div>
+                    </div>
+                    <div>
+                        <div class="store-tag flipkart">🛍️ Flipkart</div>
+                        <h3 class="deal-title">Google Pixel 8a (Obsidian, 256 GB)</h3>
+                        <div class="deal-prices">
+                            <div class="new-price">₹39,999</div>
+                            <div class="old-price">₹59,000</div>
+                        </div>
+                    </div>
+                    <div class="earn-pill">🎁 Earn +300 Coins</div>
+                    <a href="https://dl.flipkart.com/s/sample" target="_blank" class="btn btn-primary"
+                        style="width: 100%; background: linear-gradient(90deg, #ff3300, #ff8c00); border: none;">Grab
+                        Deal Now ↗</a>
+                </div>
+
+                <div class="deal-card flash animate-on-scroll" data-category="flash electronics">
+                    <div class="deal-img-box">
+                        🎧
+                        <div class="discount-badge">↓ 45% OFF</div>
+                        <div class="timer-box countdown" data-hours="1" data-minutes="45" data-seconds="22">01:45:22
+                        </div>
+                    </div>
+                    <div>
+                        <div class="store-tag amazon">🛒 Amazon</div>
+                        <h3 class="deal-title">Sony WH-1000XM5 Wireless ANC</h3>
+                        <div class="deal-prices">
+                            <div class="new-price">₹19,990</div>
+                            <div class="old-price">₹34,990</div>
+                        </div>
+                    </div>
+                    <div class="earn-pill">🎁 Earn +150 Coins</div>
+                    <a href="https://amazon.in/sample" target="_blank" class="btn btn-primary"
+                        style="width: 100%; background: linear-gradient(90deg, #ff3300, #ff8c00); border: none;">Grab
+                        Deal Now ↗</a>
+                </div>
+
+                <div class="deal-card animate-on-scroll" data-category="electronics">
+                    <div class="deal-img-box">💻<div class="discount-badge" style="background:var(--neon-blue);">↓ 15%
+                            OFF</div>
+                    </div>
+                    <div>
+                        <div class="store-tag amazon">🛒 Amazon</div>
+                        <h3 class="deal-title">Apple MacBook Air M2 (256GB)</h3>
+                        <div class="deal-prices">
+                            <div class="new-price">₹84,990</div>
+                            <div class="old-price">₹99,900</div>
+                        </div>
+                    </div>
+                    <div class="earn-pill">🎁 Earn +500 Coins</div>
+                    <a href="https://amazon.in/sample" target="_blank" class="btn btn-primary" style="width: 100%;">View
+                        Deal ↗</a>
+                </div>
+
+                <div class="deal-card animate-on-scroll" data-category="finance">
+                    <div class="deal-img-box">💳<div class="discount-badge" style="background:#7C3AED;">PREMIUM</div>
+                    </div>
+                    <div>
+                        <div class="store-tag" style="background:rgba(255,255,255,0.1); color:#fff;">🏦 Axis Bank</div>
+                        <h3 class="deal-title">Axis Bank Credit Card (Lifetime Free)</h3>
+                        <div class="deal-prices">
+                            <div class="new-price">Free</div>
+                            <div class="old-price">₹500/yr</div>
+                        </div>
+                    </div>
+                    <div class="earn-pill" style="color:#FFD700; border-color:#FFD700; background:rgba(255,215,0,0.1);">
+                        👑 Earn +1000 Coins</div>
+                    <a href="https://web.axisbank.co.in/DigitalChannel/WebForm/" target="_blank" class="btn btn-primary"
+                        style="width: 100%; background: linear-gradient(90deg, #7C3AED, #3B82F6); border: none;">Apply
+                        Now ↗</a>
+                </div>
+
+                <div class="deal-card animate-on-scroll" data-category="fashion">
+                    <div class="deal-img-box">👟<div class="discount-badge" style="background:var(--neon-blue);">↓ 60%
+                            OFF</div>
+                    </div>
+                    <div>
+                        <div class="store-tag flipkart">🛍️ Myntra</div>
+                        <h3 class="deal-title">Nike Air Max 270 Men's Sneakers</h3>
+                        <div class="deal-prices">
+                            <div class="new-price">₹5,499</div>
+                            <div class="old-price">₹13,995</div>
+                        </div>
+                    </div>
+                    <div class="earn-pill">🎁 Earn +80 Coins</div>
+                    <a href="https://myntra.com" target="_blank" class="btn btn-primary" style="width: 100%;">View Deal
+                        ↗</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="spin.js"></script>
+    <script src="alerts.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const timers = document.querySelectorAll('.countdown');
+
+            timers.forEach(timer => {
+                let h = parseInt(timer.getAttribute('data-hours'));
+                let m = parseInt(timer.getAttribute('data-minutes'));
+                let s = parseInt(timer.getAttribute('data-seconds'));
+
+                setInterval(() => {
+                    if (s > 0) s--;
+                    else if (m > 0) { m--; s = 59; }
+                    else if (h > 0) { h--; m = 59; s = 59; }
+
+                    timer.textContent =
+                        String(h).padStart(2, '0') + ':' +
+                        String(m).padStart(2, '0') + ':' +
+                        String(s).padStart(2, '0');
+                }, 1000);
+            });
+        });
+
+        // FILTER LOGIC
+        function filterDeals(category, btnElement) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.deal-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNXh2aPjvZcWceDxCuMNzJegJ3RKwNsx0",
+            authDomain: "neonmoney-a2d18.firebaseapp.com",
+            projectId: "neonmoney-a2d18",
+            storageBucket: "neonmoney-a2d18.firebasestorage.app",
+            messagingSenderId: "759618988071",
+            appId: "1:759618988071:web:b65d190a3a7ececabc4602"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                document.getElementById('nav-auth-links').style.display = 'none';
+                document.getElementById('nav-user-menu').style.display = 'flex';
+                document.getElementById('nav-coins').style.display = 'block';
+
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                const navCoinDisplay = document.getElementById('nav-coins-val');
+
+                if (userSnap.exists() && navCoinDisplay) {
+                    navCoinDisplay.textContent = userSnap.data().coins.toLocaleString('en-IN');
+                }
+            }
+        });
+
+        document.querySelectorAll('.btn-logout').forEach(btn => {
+            btn.addEventListener('click', () => {
+                signOut(auth).then(() => { window.location.href = 'login.html'; });
+            });
+        });
+    </script>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+        }
+    </script>
+
+    <script type='text/javascript'>
+        var cId = '271764';
+        (function (d, t) {
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = (document.location.protocol == 'https:' ? 'https://cdn0.cuelinks.com/js/' : 'http://cdn0.cuelinks.com/js/') + 'cuelinksv2.js';
+            document.getElementsByTagName('body')[0].appendChild(s);
+        }());
+    </script>
+
+</body>
+
+</html>

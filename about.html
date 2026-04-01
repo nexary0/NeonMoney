@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About NeonMoney — India's Neon Deal Finder</title>
+    <meta name="description"
+        content="NeonMoney helps Indians save money by comparing Amazon vs Flipkart prices and rewarding smart shoppers with coins.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .about-hero {
+            padding: calc(var(--nav-height) + 80px) 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 178, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 178, 0.08);
+            border: 1px solid rgba(0, 255, 178, 0.2);
+            border-radius: 100px;
+            padding: 6px 18px;
+            margin-bottom: 24px;
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: var(--neon-green);
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            margin-bottom: 20px;
+        }
+
+        .about-hero p {
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Mission */
+        .mission-section {
+            padding: 80px 0;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .mission-text h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 20px;
+        }
+
+        .mission-text p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .mission-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(0, 255, 178, 0.15);
+            border-radius: var(--radius-xl);
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 178, 0.08), transparent 70%);
+        }
+
+        .mission-stat {
+            margin-bottom: 28px;
+        }
+
+        .mission-stat .stat-num {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--neon-green);
+            line-height: 1;
+        }
+
+        .mission-stat .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        /* Values */
+        .values-section {
+            padding: 80px 0;
+        }
+
+        .values-section h2 {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            margin-bottom: 12px;
+        }
+
+        .values-sub {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            font-size: 1rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .value-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .value-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 255, 178, 0.2);
+            box-shadow: var(--shadow-green);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .value-card h3 {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 0.06em;
+            margin-bottom: 12px;
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Story */
+        .story-section {
+            padding: 80px 0;
+        }
+
+        .story-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-xl);
+            padding: 50px;
+        }
+
+        .story-inner h2 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            margin-bottom: 28px;
+        }
+
+        .story-inner p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 18px;
+            font-size: 1rem;
+        }
+
+        .story-inner p strong {
+            color: var(--text-primary);
+        }
+
+        .story-quote {
+            border-left: 3px solid var(--neon-green);
+            padding-left: 20px;
+            margin: 28px 0;
+            font-size: 1.1rem;
+            color: var(--text-primary) !important;
+            font-style: italic;
+        }
+
+        /* Team */
+        .team-section {
+            padding: 60px 0 80px;
+        }
+
+        .team-section h2 {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            margin-bottom: 12px;
+        }
+
+        .team-sub {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .team-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            border-color: rgba(124, 58, 237, 0.3);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.1);
+        }
+
+        .team-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .team-card h3 {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+
+        .team-card .role {
+            color: var(--neon-green);
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+
+        .team-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .about-cta {
+            padding: 80px 0;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 178, 0.05) 0%, transparent 70%);
+        }
+
+        .about-cta h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 20px;
+        }
+
+        .about-cta p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto 36px;
+        }
+
+        .about-cta-btns {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+
+            .mission-grid,
+            .values-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-inner {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-auth-links" style="display:flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+                </div>
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="about-badge animate-on-scroll">🚀 ABOUT US</div>
+            <h1 class="gradient-text animate-on-scroll">We're on a Mission to<br>End Overpaying</h1>
+            <p class="animate-on-scroll">NeonMoney helps users save money by finding the best deals and rewarding them
+                with coins for smart shopping.</p>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-text animate-on-scroll">
+                    <h2 class="gradient-text">Why NeonMoney Exists</h2>
+                    <p>Every day, millions of Indians overpay for products online — not because the best price doesn't
+                        exist, but because finding it takes too much time and effort. Amazon and Flipkart both run
+                        simultaneous deals, flash sales, and price cuts. The best price switches between them
+                        constantly.</p>
+                    <p>NeonMoney was built to solve this in seconds. Compare, save, and get rewarded — all in one place.
+                    </p>
+                    <p><strong style="color:var(--neon-green);">We also believe you should be rewarded for smart
+                            shopping.</strong> That's why every purchase through our platform earns you coins you can
+                        redeem for real rewards.</p>
+                </div>
+                <div class="mission-card animate-on-scroll">
+                    <div class="mission-stat">
+                        <div class="stat-num" id="about-users">0</div>
+                        <div class="stat-label">Happy Users</div>
+                    </div>
+                    <div class="mission-stat">
+                        <div class="stat-num" id="about-saved">₹0</div>
+                        <div class="stat-label">Total Savings Generated</div>
+                    </div>
+                    <div class="mission-stat">
+                        <div class="stat-num" id="about-deals">0</div>
+                        <div class="stat-label">Deals Tracked Daily</div>
+                    </div>
+                    <div class="mission-stat" style="margin-bottom:0;">
+                        <div class="stat-num" id="about-coins">0</div>
+                        <div class="stat-label">Coins Distributed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="gradient-text animate-on-scroll">What We Stand For</h2>
+            <p class="values-sub animate-on-scroll">Three principles guide everything we build</p>
+            <div class="values-grid">
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">🔍</div>
+                    <h3>RADICAL TRANSPARENCY</h3>
+                    <p>We tell you exactly where every price comes from, how our affiliate links work, and why certain
+                        deals appear on top. No hidden agendas.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">💸</div>
+                    <h3>YOU SAVE FIRST</h3>
+                    <p>We only show a deal if it's genuinely a deal. Our coin rewards are funded by affiliate
+                        commissions — not by inflating prices for you.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">🎮</div>
+                    <h3>MAKE SAVING FUN</h3>
+                    <p>Saving money shouldn't feel like doing homework. Coins, streaks, spin wheels — we gamify smart
+                        shopping so you actually look forward to it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-inner animate-on-scroll">
+                <h2 class="gradient-text">The NeonMoney Story</h2>
+                <p>It started with a simple frustration: <strong>buying headphones online</strong>. The same product was
+                    ₹1,299 on Amazon and ₹999 on Flipkart — but which site to check first? And by the time you finished
+                    checking, the flash sale had ended.</p>
+                <div class="story-quote">
+                    "Why doesn't a single place show me both prices instantly — and actually reward me for buying
+                    smart?"
+                </div>
+                <p>That question led to NeonMoney. We built a platform that does exactly that: <strong>real-time price
+                        comparison between Amazon and Flipkart</strong>, with a coin rewards system layered on top so
+                    that every smart purchase becomes a double win.</p>
+                <p>We're a small, passionate team based in India. We understand the Indian shopping ecosystem — the
+                    festival sales, the flash deals, the price tricks. And we're here to make sure you never get caught
+                    on the wrong side of a price difference again.</p>
+                <p>We're just getting started. Product categories, more stores, and smarter alerts are all on the
+                    roadmap. <strong>Join us early — the rewards are better now than they'll ever be.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="gradient-text animate-on-scroll">Meet the Team</h2>
+            <p class="team-sub animate-on-scroll">Small team. Big mission.</p>
+            <div class="team-grid">
+                <div class="team-card animate-on-scroll">
+                    <div class="team-avatar">👨‍💻</div>
+                    <h3>Aryan Mehta</h3>
+                    <p class="role">Founder & CEO</p>
+                    <p>Former e-commerce analyst who got tired of manually comparing prices every time he shopped
+                        online. Built NeonMoney to solve his own problem.</p>
+                </div>
+                <div class="team-card animate-on-scroll">
+                    <div class="team-avatar">👩‍🎨</div>
+                    <h3>Priya Nair</h3>
+                    <p class="role">Head of Design</p>
+                    <p>UI/UX designer obsessed with dark mode and making financial tools actually enjoyable to use.
+                        Designed the entire Neon Moneyverse aesthetic.</p>
+                </div>
+                <div class="team-card animate-on-scroll">
+                    <div class="team-avatar">🧑‍🔬</div>
+                    <h3>Rahul Singh</h3>
+                    <p class="role">Tech Lead</p>
+                    <p>Full-stack engineer who built the price tracking engine. Previously worked on data pipelines for
+                        a top Indian fintech startup.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+        <div class="container">
+            <h2 class="gradient-text animate-on-scroll">Ready to Stop Overpaying?</h2>
+            <p class="animate-on-scroll">Join thousands of smart shoppers who compare first and earn coins for every
+                smart buy.</p>
+            <div class="about-cta-btns animate-on-scroll">
+                <a href="signup.html" class="btn btn-primary btn-lg btn-ripple">🚀 Start for Free</a>
+                <a href="deals.html" class="btn btn-secondary btn-lg">🔥 Explore Deals</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo" style="margin-bottom:12px; display:inline-flex;">
+                        <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+                    </a>
+                    <p>We help users save money by finding the best deals and rewarding them with coins for smart
+                        shopping.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4><a href="deals.html">All Deals</a><a href="store.html">Stores</a><a
+                        href="rewards.html">Rewards</a><a href="dashboard.html">Dashboard</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a href="about.html"
+                        style="color:var(--neon-green);">About Us</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &
+                        Conditions</a><a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 NeonMoney. All rights reserved.</p>
+                <p>We earn through affiliate links. <a href="disclaimer.html"
+                        style="color:var(--neon-green);text-decoration:none;">Read Disclaimer</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Animated counters
+        function animateCounter(el, target, prefix, suffix, duration) {
+            let start = 0, step = target / (duration / 16);
+            const timer = setInterval(() => {
+                start = Math.min(start + step, target);
+                el.textContent = prefix + Math.floor(start).toLocaleString('en-IN') + suffix;
+                if (start >= target) clearInterval(timer);
+            }, 16);
+        }
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    animateCounter(document.getElementById('about-users'), 12400, '', '+', 1600);
+                    animateCounter(document.getElementById('about-saved'), 5800000, '₹', '', 2000);
+                    animateCounter(document.getElementById('about-deals'), 3200, '', '+', 1400);
+                    animateCounter(document.getElementById('about-coins'), 980000, '', '+', 2000);
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+        const statsEl = document.getElementById('about-users');
+        if (statsEl) observer.observe(statsEl.closest('.mission-card'));
+    </script>
+</body>
+
+</html>

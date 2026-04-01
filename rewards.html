@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards — NeonMoney 💸</title>
+
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        .reward-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+            padding-bottom: 60px;
+        }
+
+        .reward-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 30px 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .reward-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reward-cost {
+            font-family: var(--font-display, sans-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+
+            <a href="index.html" class="nav-logo"
+                style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                <img src="logo.png" alt="" style="height: 36px; width: 36px; border-radius: 8px; object-fit: cover;">
+                <span
+                    style="color: #fff; font-weight: bold; font-size: 1.4rem; font-family: var(--font-display, sans-serif);">Neon<span
+                        style="color: var(--neon-green);">Money</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html" class="active">Rewards</a> <a href="faq.html">FAQ</a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+
+                <div id="nav-auth-links" style="display:flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+                </div>
+
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 120px;">
+
+        <div style="margin-bottom: 40px;">
+            <span class="badge"
+                style="background: rgba(0,255,178,0.1); color: var(--neon-green); border: 1px solid rgba(0,255,178,0.3); margin-bottom: 16px; display: inline-block;">🎁
+                COIN REWARDS</span>
+            <h1 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem);">Redeem Your <span
+                    class="gradient-text">Coins</span></h1>
+            <p style="color: var(--text-muted); max-width: 600px; margin-top: 12px; font-size: 1.1rem;">Turn your coins
+                into real value — gift cards, mobile recharges, and exclusive deals.</p>
+        </div>
+
+        <div
+            style="background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 30px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px;">
+
+            <div>
+                <div
+                    style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+                    Your Balance</div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div
+                        style="background: var(--neon-green); width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #000;">
+                        💰</div>
+                    <div style="font-family: var(--font-display); font-size: 2rem; color: #fff; font-weight: bold;"
+                        id="user-coin-balance">0</div>
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">0 confirmed · 0 pending
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <div
+                    style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+                    Coin → Value</div>
+                <div style="font-family: var(--font-display); font-size: 1.5rem; color: #fff; font-weight: bold;">
+                    <span id="calc-coins">0</span> coins = ₹<span id="calc-rupees">0</span>
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">Min. redemption: 500
+                    coins</div>
+            </div>
+
+            <div>
+                <a href="dashboard.html" class="btn btn-primary"
+                    style="padding: 14px 28px; font-size: 1.1rem; border-radius: 12px;">Earn More Coins →</a>
+            </div>
+
+        </div>
+
+        <div class="reward-grid">
+
+            <div class="reward-card">
+                <div class="reward-icon">🛒</div>
+                <h3 style="color: #fff;">Amazon Gift Card</h3>
+                <div class="reward-cost">500 <span style="font-size:1.2rem;">💰</span></div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; flex-grow: 1;">Get a ₹50
+                    Amazon voucher. Valid for 1 year.</p>
+                <button class="btn btn-primary redeem-btn" data-cost="500" style="width: 100%;">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">🛍️</div>
+                <h3 style="color: #fff;">Flipkart Voucher</h3>
+                <div class="reward-cost">500 <span style="font-size:1.2rem;">💰</span></div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; flex-grow: 1;">₹50 off your
+                    next Flipkart order.</p>
+                <button class="btn btn-primary redeem-btn" data-cost="500" style="width: 100%;">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">📱</div>
+                <h3 style="color: #fff;">Mobile Recharge</h3>
+                <div class="reward-cost">1000 <span style="font-size:1.2rem;">💰</span></div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; flex-grow: 1;">₹100
+                    recharge for any network.</p>
+                <button class="btn btn-primary redeem-btn" data-cost="1000" style="width: 100%;">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">▶️</div>
+                <h3 style="color: #fff;">Google Play Credit</h3>
+                <div class="reward-cost">750 <span style="font-size:1.2rem;">💰</span></div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; flex-grow: 1;">₹75 Google
+                    Play Store credit.</p>
+                <button class="btn btn-primary redeem-btn" data-cost="750" style="width: 100%;">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">☕</div>
+                <h3 style="color: #fff;">Swiggy Voucher</h3>
+                <div class="reward-cost">600 <span style="font-size:1.2rem;">💰</span></div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; flex-grow: 1;">₹60 off on
+                    food orders.</p>
+                <button class="btn btn-primary redeem-btn" data-cost="600" style="width: 100%;">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">🎬</div>
+                <h3 style="color: #fff;">OTT Subscription</h3>
+                <div class="reward-cost">2000 <span style="font-size:1.2rem;">💰</span></div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; flex-grow: 1;">1 month
+                    Netflix/Prime access.</p>
+                <button class="btn btn-primary redeem-btn" data-cost="2000" style="width: 100%;">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">⚡</div>
+                <h3 style="color: #fff;">Flash Deal Access</h3>
+                <div class="reward-cost">250 <span style="font-size:1.2rem;">💰</span></div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; flex-grow: 1;">Unlock
+                    exclusive 24h flash deals.</p>
+                <button class="btn btn-primary redeem-btn" data-cost="250" style="width: 100%;">Redeem</button>
+            </div>
+
+            <div class="reward-card">
+                <div class="reward-icon">🎁</div>
+                <h3 style="color: #fff;">Mystery Box</h3>
+                <div class="reward-cost">1500 <span style="font-size:1.2rem;">💰</span></div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; flex-grow: 1;">Random
+                    reward worth ₹150+!</p>
+                <button class="btn btn-primary redeem-btn" data-cost="1500" style="width: 100%;">Redeem</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNXh2aPjvZcWceDxCuMNzJegJ3RKwNsx0",
+            authDomain: "neonmoney-a2d18.firebaseapp.com",
+            projectId: "neonmoney-a2d18",
+            storageBucket: "neonmoney-a2d18.firebasestorage.app",
+            messagingSenderId: "759618988071",
+            appId: "1:759618988071:web:b65d190a3a7ececabc4602"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+
+                // FIX 3: LOGIN VISIBILITY FIX
+                document.getElementById('nav-auth-links').style.display = 'none';
+                document.getElementById('nav-user-menu').style.display = 'flex';
+                document.getElementById('nav-coins').style.display = 'block';
+
+                // Fetch Live Coin Balance
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+
+                let currentCoins = 0;
+                if (userSnap.exists()) {
+                    currentCoins = userSnap.data().coins;
+                } else {
+                    currentCoins = parseInt(localStorage.getItem('neon_coins')) || 0;
+                }
+
+                // Update Balance Numbers on Screen
+                document.getElementById('user-coin-balance').textContent = currentCoins;
+                document.getElementById('nav-coins-val').textContent = currentCoins.toLocaleString('en-IN');
+                document.getElementById('calc-coins').textContent = currentCoins;
+                document.getElementById('calc-rupees').textContent = currentCoins / 10;
+
+                // SMART REWARD BUTTON LOGIC
+                const redeemBtns = document.querySelectorAll('.redeem-btn');
+                redeemBtns.forEach(btn => {
+                    const cost = parseInt(btn.getAttribute('data-cost'));
+
+                    if (currentCoins >= cost) {
+                        btn.className = 'btn btn-primary redeem-btn';
+                        btn.style.background = '';
+                        btn.style.color = '#fff';
+                        btn.style.borderColor = 'transparent';
+                        btn.textContent = 'Redeem';
+                        btn.disabled = false;
+                    } else {
+                        btn.className = 'btn btn-secondary redeem-btn';
+                        btn.style.background = 'rgba(255,255,255,0.03)';
+                        btn.style.color = '#64748b';
+                        btn.style.borderColor = 'rgba(255,255,255,0.1)';
+                        btn.textContent = cost + ' Coins Needed';
+                        btn.disabled = true;
+                    }
+                });
+
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Logout Logic
+        document.querySelectorAll('.btn-logout').forEach(btn => {
+            btn.addEventListener('click', () => {
+                signOut(auth).then(() => {
+                    window.location.href = 'login.html';
+                });
+            });
+        });
+    </script>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+
+</html>

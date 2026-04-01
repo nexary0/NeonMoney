@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="google-site-verification" content="bJb89nECFPIp40_IYAy-Up1r7DOMBlDSMGLVQT8Q098" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeonMoney | Compare Amazon vs Flipkart Prices & Earn Rewards</title>
+  <meta name="description"
+    content="Stop overpaying online! Compare live prices between Amazon and Flipkart, find the lowest price online, and earn coins to redeem for free gift cards in India.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animations.css">
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-height);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #particles {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 255, 178, 0.08);
+      border: 1px solid rgba(0, 255, 178, 0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 24px;
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--neon-green);
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 36px;
+      max-width: 460px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-social-proof {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .proof-avatars {
+      display: flex;
+    }
+
+    .proof-avatars .av {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--bg-deep);
+      background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      margin-left: -8px;
+    }
+
+    .proof-avatars .av:first-child {
+      margin-left: 0;
+    }
+
+    .proof-text {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .proof-text strong {
+      color: var(--neon-green);
+    }
+
+    /* HERO RIGHT — Floating card */
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-price-card {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(0, 255, 178, 0.2);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), var(--shadow-green);
+    }
+
+    .hpc-product {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .hpc-img {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: rgba(0, 255, 178, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+
+    .hpc-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+    }
+
+    .hpc-cat {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: var(--font-ui);
+    }
+
+    .hpc-compare {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .hpc-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+    }
+
+    .hpc-row.amazon {
+      background: rgba(255, 153, 0, 0.08);
+      border: 1px solid rgba(255, 153, 0, 0.15);
+    }
+
+    .hpc-row.flipkart {
+      background: rgba(40, 116, 240, 0.08);
+      border: 1px solid rgba(40, 116, 240, 0.15);
+    }
+
+    .hpc-store {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hpc-store.amazon {
+      color: #FF9900;
+    }
+
+    .hpc-store.flipkart {
+      color: #2874F0;
+    }
+
+    .hpc-price {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .hpc-best {
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: var(--neon-green);
+      color: #0A0A0F;
+      padding: 2px 7px;
+      border-radius: 100px;
+    }
+
+    .hpc-saving {
+      text-align: center;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: rgba(0, 255, 178, 0.08);
+      border: 1px solid rgba(0, 255, 178, 0.15);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--neon-green);
+    }
+
+    .hpc-saving strong {
+      font-size: 1.1rem;
+    }
+
+    /* Floating mini chips */
+    .float-chip {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-card);
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    .chip-1 {
+      top: -20px;
+      right: -20px;
+      color: var(--neon-yellow);
+      border-color: rgba(251, 191, 36, 0.2);
+    }
+
+    .chip-2 {
+      bottom: -16px;
+      left: -24px;
+      color: var(--neon-green);
+      border-color: rgba(0, 255, 178, 0.2);
+    }
+
+    /* ── LOSS ALERT ── */
+    .loss-section {
+      padding: 60px 0;
+    }
+
+    .loss-alert-box {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255, 107, 43, 0.06);
+      border: 1px solid rgba(255, 107, 43, 0.2);
+      border-radius: var(--radius-lg);
+      padding: 24px 32px;
+      max-width: 760px;
+      margin: 0 auto;
+      animation: alert-pulse 2.5s ease-in-out infinite;
+    }
+
+    .alert-icon-big {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+
+    .alert-msg {
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      color: var(--text-primary);
+      transition: opacity 0.4s;
+    }
+
+    .alert-msg strong {
+      color: var(--neon-orange);
+    }
+
+    /* ── SPIN SECTION ── */
+    .spin-home-section {
+      padding: 80px 0;
+    }
+
+    .spin-home-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .spin-content h2 {
+      margin-bottom: 16px;
+    }
+
+    .spin-content p {
+      margin-bottom: 28px;
+    }
+
+    .spin-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .spin-perk {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .spin-perk-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: rgba(0, 255, 178, 0.08);
+    }
+
+    .spin-visual {
+      position: relative;
+      text-align: center;
+    }
+
+    #spin-wheel-el-home {
+      width: 280px;
+      height: 280px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      padding: 80px 0;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+    }
+
+    .steps-connector {
+      position: absolute;
+      top: 40px;
+      left: 25%;
+      right: 25%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 178, 0.3), transparent);
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 36px 28px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .step-card:hover {
+      border-color: rgba(0, 255, 178, 0.2);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-green);
+    }
+
+    .step-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .step-card h3 {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .step-card p {
+      font-size: 0.88rem;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section {
+      padding: 80px 0;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    .review-card:hover {
+      border-color: rgba(0, 255, 178, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .review-stars {
+      color: var(--neon-yellow);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .review-text {
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .review-av {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .review-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+    }
+
+    .review-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-ui);
+    }
+
+    .review-saving {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      color: var(--neon-green);
+      background: rgba(0, 255, 178, 0.08);
+      padding: 2px 8px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* ── STATS BANNER ── */
+    .stats-section {
+      padding: 60px 0;
+    }
+
+    .stats-bar {
+      background: linear-gradient(135deg, rgba(0, 255, 178, 0.06), rgba(124, 58, 237, 0.06));
+      border: 1px solid rgba(0, 255, 178, 0.12);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--neon-green);
+    }
+
+    .stat-label {
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 100px 0;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(0, 255, 178, 0.08), rgba(124, 58, 237, 0.08));
+      border: 1px solid rgba(0, 255, 178, 0.15);
+      border-radius: var(--radius-xl);
+      padding: 80px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
+    }
+
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 255, 178, 0.1), transparent 70%);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-box p {
+      margin-bottom: 36px;
+      font-size: 1.05rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── TRACKER VAULT ITEMS ── */
+    .vault-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .vault-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--neon-blue);
+    }
+
+    .vault-link {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      word-break: break-all;
+      margin-right: 15px;
+    }
+
+    .vault-link:hover {
+      color: var(--neon-blue);
+      text-decoration: underline;
+    }
+
+    .badge-tracking {
+      background: rgba(0, 242, 254, 0.1);
+      color: #00f2fe;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: auto !important;
+        padding-top: 130px !important;
+        padding-bottom: 40px !important;
+        align-items: flex-start !important;
+      }
+
+      .real-cash-section,
+      .tracker-section,
+      .spin-home-section,
+      .how-section,
+      .stats-section,
+      .reviews-section,
+      .cta-section {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+      }
+
+      .hero-grid,
+      .spin-home-wrap {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .steps-grid,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .fire-ice-btn {
+      display: inline-block !important;
+      padding: 16px 48px !important;
+      font-family: var(--font-display) !important;
+      font-size: 1rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em !important;
+      color: #fff !important;
+      background: linear-gradient(135deg, #FF6B2B, #ff0055) !important;
+      border-radius: 100px !important;
+      border: none !important;
+      cursor: pointer !important;
+      text-decoration: none !important;
+      box-shadow: 0 0 30px rgba(255, 107, 43, 0.5) !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .fire-ice-btn:hover {
+      transform: scale(1.05) !important;
+      color: #fff !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-mesh"></div>
+  <div class="bg-noise"></div>
+  <div id="particles"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" style="display: flex; align-items:center; gap:8px; text-decoration:none;">
+        <img src="logo.png" alt="" style="height:36px; width:36px; border-radius:8px; object-fit:cover;">
+        <span
+          style="color:#fff; font-weight:bold; font-size:1.4rem; font-family:var(--font-display, sans-serif);">Neon<span
+            style="color:var(--neon-green);">Money</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="deals.html">Deals</a>
+        <a href="store.html">Stores</a>
+        <a href="rewards.html">Rewards</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+        <div id="nav-auth-links" style="display: flex; gap:8px;">
+          <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+          <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
+        </div>
+        <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+          <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+          <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+        </div>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="scrolling-ticker">
+    <div class="ticker-content">
+      <span class="ticker-item">✨ Track genuine price drops</span><span class="ticker-dot">•</span>
+      <span class="ticker-item">🔥 Compare Amazon vs Flipkart instantly</span><span class="ticker-dot">•</span>
+      <span class="ticker-item">💰 Earn coins on every purchase</span><span class="ticker-dot">•</span>
+      <span class="ticker-item">🎁 Redeem for real cash rewards</span><span class="ticker-dot">•</span>
+      <span class="ticker-item">✨ Track genuine price drops</span><span class="ticker-dot">•</span>
+      <span class="ticker-item">🔥 Compare Amazon vs Flipkart instantly</span><span class="ticker-dot">•</span>
+      <span class="ticker-item">💰 Earn coins on every purchase</span><span class="ticker-dot">•</span>
+      <span class="ticker-item">🎁 Redeem for real cash rewards</span><span class="ticker-dot">•</span>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-eyebrow" style="animation-delay:0s;">🔥 Live Price Comparison · India's #1 Deal Finder</div>
+          <h1 class="hero-title gradient-text" style="animation-delay:0.1s;">Stop Overpaying<br>Online 💸</h1>
+
+          <div class="hero-search-container">
+            <div class="hero-search-box">
+              <input type="text" id="neonSearchBar" placeholder="Paste a Flipkart / Amazon link or Search a Product">
+              <button onclick="forceSearch()">Search ↗</button>
+              <button id="hero-analyze-btn">Search ↗</button>
+            </div>
+          </div>
+          <p class="hero-subtitle" style="animation-delay:0.2s;">Check prices, unlock deals, and earn coins before you
+            buy. Compare Amazon vs Flipkart instantly.</p>
+          <div class="hero-buttons hero-cta">
+            <a href="#tracker-anchor" class="btn btn-secondary btn-lg btn-ripple">🚀 Track a Price</a>
+          </div>
+          <div class="hero-social-proof">
+            <div class="proof-avatars">
+              <div class="av">👤</div>
+              <div class="av">👤</div>
+              <div class="av">👤</div>
+              <div class="av">👤</div>
+              <div class="av">+</div>
+            </div>
+            <p class="proof-text"><strong>50,000+</strong> users saved this month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="real-cash-section" style="padding:80px 0;">
+    <div class="container">
+      <div class="cta-box"
+        style="background:linear-gradient(135deg,rgba(255,107,43,0.05),rgba(255,0,85,0.05)); border:1px solid rgba(255,107,43,0.2); border-radius:var(--radius-xl); padding:60px 20px; text-align:center;">
+        <h2
+          style="font-size:clamp(2.5rem,5vw,4rem); margin-bottom:16px; color:#FF6B2B; font-family:var(--font-display); text-shadow:0 0 20px rgba(255,107,43,0.3);">
+          Real Cash.</h2>
+        <p
+          style="max-width:600px; margin:0 auto 32px auto; font-size:1.1rem; color:var(--text-secondary); line-height:1.6;">
+          Stop leaving money on the table. Explore our directory of 25+ top Indian stores. Click our link, buy your
+          item, and get cash added directly to your NeonMoney vault!
+        </p>
+        <a href="store.html" class="fire-ice-btn">ENTER THE STORE NOW</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracker-anchor" class="tracker-section" style="padding:20px 0 80px;">
+    <div class="container">
+      <div class="search-wrap" style="max-width:800px; margin:0 auto; text-align:center;">
+        <h2 class="section-title" style="display: flex; align-items:center; justify-content:center; gap:12px;">
+          <span style="font-size:2rem;">📈</span> Smart Price Tracker
+        </h2>
+        <p class="section-sub" style="margin-top:12px;">Paste a product link from Amazon or Flipkart. We will instantly
+          analyze its 90-day price history!</p>
+        <div class="search-box"
+          style="margin-top:40px; background:rgba(15,23,42,0.8); border:1px solid var(--border); display: flex; align-items:center; padding:8px 8px 8px 20px; border-radius:var(--radius-lg);">
+          <input type="url" id="product-url" placeholder="https://www.amazon.in/dp/B08..."
+            style="flex:1; background:transparent; border:none; color:white; outline:none; font-size:1rem; width:100%;">
+          <button id="analyze-btn" class="btn btn-primary"
+            style="background:var(--neon-blue); color:#0A0A0F; box-shadow:0 0 15px rgba(0,212,255,0.4);">
+            Analyze Link ↗
+          </button>
+        </div>
+        <div style="margin-top:80px; text-align:left;">
+          <h3 style="display: flex; align-items:center; gap:12px; font-family:var(--font-display); font-size:1.5rem;">
+            <span style="font-size:1.8rem;">🗃</span> My Tracked Vault
+          </h3>
+          <div id="tracked-list"
+            style="margin-top:24px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:48px 20px; text-align:center; color:var(--text-muted);">
+            <p>Login to view your saved products.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="loss-section">
+    <div class="container">
+      <div class="section-label animate-on-scroll"><span class="section-tag"> ⚠ Price Intelligence</span></div>
+      <h2 class="section-title animate-on-scroll">Don't Lose Money<br>on <span class="gradient-text">Bad Timing</span>
+      </h2>
+      <br>
+      <div class="loss-alert-box animate-on-scroll">
+        <div class="alert-icon-big"> ⚠ </div>
+        <div>
+          <div class="alert-msg" id="loss-alert-text"></div>
+          <a href="deals.html" class="btn btn-secondary btn-sm" style="margin-top:12px;">See All Alerts →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spin-home-section">
+    <div class="container">
+      <div class="spin-home-wrap">
+        <div class="spin-content animate-on-scroll">
+          <span class="section-tag">🎰 Daily Rewards</span>
+          <h2 style="margin-top:16px;">Spin & Win <span class="gradient-text">Coins</span> Every Day</h2>
+          <p>Come back daily to spin the wheel. Win coins, unlock premium deals, and redeem for gift cards or recharges.
+          </p>
+          <div class="spin-perks">
+            <div class="spin-perk">
+              <div class="spin-perk-icon">🎯</div> One free spin every 24 hours
+            </div>
+            <div class="spin-perk">
+              <div class="spin-perk-icon">🔥</div> Streak bonuses up to 100 coins
+            </div>
+            <div class="spin-perk">
+              <div class="spin-perk-icon">🎁</div> Redeem for Amazon/Flipkart vouchers
+            </div>
+          </div>
+          <a href="dashboard.html" class="btn btn-primary btn-lg btn-ripple">🎰 Spin Now</a>
+        </div>
+        <div class="spin-visual animate-on-scroll delay-2">
+          <div class="spin-wheel-wrap" style="width:280px; height:280px; margin:0 auto;">
+            <div class="spin-outer-ring"></div>
+            <div class="spin-pointer"> ▼ </div>
+            <svg id="spin-wheel-svg" class="spin-wheel-svg" viewBox="0 0 220 220"
+              xmlns="http://www.w3.org/2000/svg"></svg>
+          </div>
+          <p style="text-align:center; margin-top:16px; font-size:0.85rem; color:var(--text-muted);">Login to spin for
+            free</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-section">
+    <div class="container">
+      <div class="section-label animate-on-scroll"><span class="section-tag">🧠 Simple Process</span></div>
+      <h2 class="section-title animate-on-scroll">How <span class="gradient-text">NeonMoney</span> Works</h2>
+      <p class="section-sub animate-on-scroll">Three easy steps to start saving money and earning coins on every
+        purchase.</p>
+      <div class="steps-grid">
+        <div class="steps-connector"></div>
+        <div class="step-card glass-card animate-on-scroll delay-1">
+          <span class="step-num">01</span>
+          <span class="step-icon">🔍</span>
+          <h3>Search Any Product</h3>
+          <p>Type the product name — headphones, shoes, phones, anything. Our engine scans Amazon and Flipkart
+            instantly.</p>
+        </div>
+        <div class="step-card glass-card animate-on-scroll delay-2">
+          <span class="step-num">02</span>
+          <span class="step-icon">💸</span>
+          <h3>Check the Best Price</h3>
+          <p>We compare both platforms side by side and highlight where you save the most. No hidden tricks, just the
+            truth.</p>
+        </div>
+        <div class="step-card glass-card animate-on-scroll delay-3">
+          <span class="step-num">03</span>
+          <span class="step-icon">🏆</span>
+          <h3>Earn Coins & Save</h3>
+          <p>Buy through our link, come back, and earn coins. Use them for gift cards, recharges, or exclusive deals.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-bar animate-on-scroll"
+        style="display:grid!important; grid-template-columns:repeat(4,1fr)!important; gap:32px!important;">
+        <div>
+          <div class="stat-num" data-count="50000" data-suffix="+">50,000+</div>
+          <div class="stat-label">Happy Users</div>
+        </div>
+        <div>
+          <div class="stat-num" data-count="2500000" data-prefix="₹">₹25L</div>
+          <div class="stat-label">Total Savings</div>
+        </div>
+        <div>
+          <div class="stat-num" data-count="10000" data-suffix="+">10,000+</div>
+          <div class="stat-label">Deals Tracked</div>
+        </div>
+        <div>
+          <div class="stat-num" data-count="500000" data-suffix="+">5L+</div>
+          <div class="stat-label">Coins Distributed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews-section">
+    <div class="container">
+      <div class="section-label animate-on-scroll"><span class="section-tag">⭐ Real Reviews</span></div>
+      <h2 class="section-title animate-on-scroll">People Are <span class="gradient-text">Loving It</span></h2>
+      <p class="section-sub animate-on-scroll">Real users, real savings. Here's what they're saying.</p>
+      <div class="reviews-grid"
+        style="display:grid!important; grid-template-columns:repeat(3,1fr)!important; gap:20px!important;">
+        <div class="review-card animate-on-scroll delay-1">
+          <div class="review-stars"> ★★★★★ </div>
+          <p class="review-text">"I saved ₹2,000 on my Sony headphones just by comparing prices here. The coin rewards
+            are real — already redeemed for a Flipkart voucher!"</p>
+          <div class="review-author">
+            <div class="review-av" style="background:rgba(0,255,178,0.1)">👤</div>
+            <div>
+              <div class="review-name">Priya S.</div>
+              <div class="review-meta">Mumbai · 3 days ago</div>
+              <div class="review-saving">Saved ₹2,000 💚</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card animate-on-scroll delay-2">
+          <div class="review-stars"> ★★★★★ </div>
+          <p class="review-text">"The price alert feature is a game changer. Got noticed exactly when the Samsung TV
+            dropped. Saved ₹5,000 plus got 350 coins!"</p>
+          <div class="review-author">
+            <div class="review-av" style="background:rgba(124,58,237,0.1)">👤</div>
+            <div>
+              <div class="review-name">Rahul M.</div>
+              <div class="review-meta">Bengaluru · 1 week ago</div>
+              <div class="review-saving">Saved ₹5,000 💜</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card animate-on-scroll delay-3">
+          <div class="review-stars"> ★★★★☆ </div>
+          <p class="review-text">"Daily spin is genuinely fun! I've been on a 7-day streak and already have 400+ coins.
+            Got rewards easily without doing anything complicated."</p>
+          <div class="review-author">
+            <div class="review-av" style="background:rgba(59,130,246,0.1)">👤</div>
+            <div>
+              <div class="review-name">Ananya K.</div>
+              <div class="review-meta">Delhi · 5 days ago</div>
+              <div class="review-saving">400+ Coins earned 💰</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box animate-on-scroll">
+        <span class="section-tag">🚀 Join Free</span>
+        <h2 style="margin-top:16px;">Start Saving <span class="gradient-text">Right Now</span></h2>
+        <p>Join 50,000+ smart shoppers who never overpay. Free to sign up. Real rewards. Zero risk.</p>
+        <div class="cta-buttons">
+          <a href="signup.html" class="btn btn-primary btn-lg btn-ripple">👉 Sign Up Free</a>
+          <a href="deals.html" class="btn btn-secondary btn-lg btn-ripple">🔥 Browse Deals</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom:12px; display:inline-flex;">
+            <div class="logo-icon">💸</div>Neon<span class="accent">Money</span>
+          </a>
+          <p>We help users save money by finding the best deals and rewarding them with coins for smart shopping.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4><a href="deals.html">All Deals</a><a href="store.html">Stores</a><a
+            href="rewards.html">Rewards</a><a href="dashboard.html">Dashboard</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4><a href="faq.html">FAQ</a><a href="contact.html">Contact Us</a><a href="about.html">About
+            Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms & Conditions</a><a
+            href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 NeonMoney. All rights reserved.</p>
+        <p>We earn through affiliate links. <a href="disclaimer.html"
+            style="color:var(--neon-green); text-decoration:none;">Read Disclaimer</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-content">
+      <div class="cookie-icon">🍪</div>
+      <div>
+        <h4 style="margin-bottom:4px; font-family:var(--font-display); color:var(--text-primary);">We value your privacy
+        </h4>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin:0; line-height:1.4;">We use cookies to enhance
+          your browsing experience, serve personalized deals, and analyze our traffic.</p>
+      </div>
+    </div>
+    <div class="cookie-buttons">
+      <button id="btn-reject-cookies" class="btn btn-secondary btn-sm">Essential Only</button>
+      <button id="btn-accept-cookies" class="btn btn-primary btn-sm">Accept All</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script src="spin.js"></script>
+  <script src="alerts.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cookieBanner = document.getElementById("cookie-banner");
+      const btnAccept = document.getElementById("btn-accept-cookies");
+      const btnReject = document.getElementById("btn-reject-cookies");
+      if (!localStorage.getItem("neon_cookies_status")) {
+        setTimeout(() => { if (cookieBanner) cookieBanner.classList.add("show"); }, 2000);
+      }
+      const hideBanner = (status) => {
+        localStorage.setItem("neon_cookies_status", status);
+        cookieBanner.classList.remove("show");
+      };
+      if (btnAccept) btnAccept.addEventListener("click", () => hideBanner("accepted"));
+      if (btnReject) btnReject.addEventListener("click", () => hideBanner("rejected"));
+    });
+  </script>
+
+  <script type='text/javascript'>
+    var cId = '271764';
+    (function (d, t) {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = (document.location.protocol == 'https:' ? 'https://cdn0.cuelinks.com/js/' : 'http://cdn0.cuelinks.com/js/') + 'cuelinksv2.js';
+      document.getElementsByTagName('body')[0].appendChild(s);
+    }());
+  </script>
+
+  <script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getFirestore, collection, getDocs, query } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+    // YOUR FIREBASE CONFIG — DO NOT CHANGE
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNXh2aPjvZcWceDxCuMNzJegJ3RKwNsx0",
+      authDomain: "neonmoney-a2d18.firebaseapp.com",
+      projectId: "neonmoney-a2d18",
+      storageBucket: "neonmoney-a2d18.firebasestorage.app",
+      messagingSenderId: "759618988071",
+      appId: "1759618988071web:b65d190a3a7ececabc4602"
+    };
+
+    const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Load vault for logged-in users
+    async function loadVault(user) {
+      const listDiv = document.getElementById('tracked-list');
+      try {
+        const q = query(collection(db, "users", user.uid, "trackedProducts"));
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.empty) {
+          listDiv.innerHTML = '<p style="color:var(--text-muted); text-align:center; padding:20px;">Your vault is empty. Paste a link above to start tracking!</p>';
+          return;
+        }
+        let items = [];
+        querySnapshot.forEach((doc) => items.push(doc.data()));
+        items.sort((a, b) => (b.dateAdded ? b.dateAdded.toMillis() : 0) - (a.dateAdded ? a.dateAdded.toMillis() : 0));
+        listDiv.innerHTML = '';
+        listDiv.style.background = 'transparent';
+        listDiv.style.border = 'none';
+        listDiv.style.padding = '0';
+        items.forEach((data) => {
+          const shortLink = data.productUrl.length > 50 ? data.productUrl.substring(0, 50) + '...' : data.productUrl;
+          listDiv.innerHTML += `
+            <div class="vault-item">
+              <a href="${data.productUrl}" target="_blank" class="vault-link">${shortLink}</a>
+              <div class="badge-tracking">🔄 Tracking</div>
+            </div>`;
+        });
+      } catch (error) { console.error(error); }
+    }
+
+    onAuthStateChanged(auth, async (user) => { if (user) { loadVault(user); } });
+
+    // ANALYZE BUTTON — redirects to analysis.html
+    const analyzeBtn = document.getElementById('analyze-btn');
+    const urlInput = document.getElementById('product-url');
+    if (analyzeBtn) {
+      analyzeBtn.addEventListener('click', () => {
+        const url = urlInput.value.trim();
+
+        // Changed the alert message to be generic
+        if (!url) { alert("Please paste a product link first!"); return; }
+
+        // THE LOCK HAS BEEN DELETED FROM HERE!
+
+        analyzeBtn.textContent = "Redirecting... ⚙";
+        analyzeBtn.disabled = true;
+        window.location.href = 'analysis.html?url=' + encodeURIComponent(url);
+      });
+      // Also allow pressing Enter in the input
+      urlInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') analyzeBtn.click();
+      });
+    }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var btn = document.getElementById('analyze-btn');
+      var inp = document.getElementById('product-url');
+      function go() {
+        var url = inp ? inp.value.trim() : '';
+        if (!url) { alert('Please paste a product link first!'); return; }
+
+        btn.textContent = 'Redirecting... ⚙';
+        btn.disabled = true;
+        window.location.href = 'analysis.html?url=' + encodeURIComponent(url);
+      }
+      if (btn) btn.addEventListener('click', go);
+      if (inp) inp.addEventListener('keypress', function (e) { if (e.key === 'Enter') go(); });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // The stores you want it to type out
+      const stores = ["Amazon", "Flipkart", "Myntra", "Ajio", "Reliance Digital", "Nykaa", "Meesho"];
+      let storeIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const heroInput = document.getElementById('hero-url-input');
+
+      function typeWriterEffect() {
+        if (!heroInput) return;
+        const currentStore = stores[storeIndex];
+
+        if (isDeleting) {
+          charIndex--;
+        } else {
+          charIndex++;
+        }
+
+        // Adds the | cursor while typing
+        const cursor = (charIndex === currentStore.length && !isDeleting) ? ' link...' : '|';
+        heroInput.setAttribute('placeholder', `Paste a ${currentStore.substring(0, charIndex)}${cursor}`);
+
+        let typingSpeed = isDeleting ? 40 : 100;
+
+        // Logic to pause at the end of a word
+        if (!isDeleting && charIndex === currentStore.length) {
+          typingSpeed = 2000; // Wait 2 seconds before deleting
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          storeIndex = (storeIndex + 1) % stores.length; // Move to next store
+          typingSpeed = 500; // Pause before typing next word
+        }
+
+        setTimeout(typeWriterEffect, typingSpeed);
+      }
+
+      // Start the typing effect 1 second after page loads
+      setTimeout(typeWriterEffect, 1000);
+
+      // Make the new search button actually work and redirect to analysis.html
+      var heroBtn = document.getElementById('hero-analyze-btn');
+      function goHero() {
+        var url = heroInput ? heroInput.value.trim() : '';
+        if (!url) { alert('Please paste an Amazon or Flipkart link first!'); return; }
+        heroBtn.textContent = 'Analyzing... ⚙';
+        heroBtn.disabled = true;
+        window.location.href = 'analysis.html?url=' + encodeURIComponent(url);
+      }
+      if (heroBtn) heroBtn.addEventListener('click', goHero);
+      if (heroInput) heroInput.addEventListener('keypress', function (e) { if (e.key === 'Enter') goHero(); });
+    });
+  </script>
+  <script>
+    function forceSearch() {
+      // Grab the link using the brand new ID
+      const pastedLink = document.getElementById('neonSearchBar').value.trim();
+
+      if (pastedLink === "") {
+        alert("The box is empty! Please paste a link.");
+        return;
+      }
+
+      // Force the redirect, bypassing all old rules
+      window.location.href = "analysis.html?url=" + encodeURIComponent(pastedLink);
+    }
+  </script>
+</body>
+
+</html>
