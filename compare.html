@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Prices | NeonMoney</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -72,10 +73,13 @@
                         style="color:var(--neon-green);">Money</span></span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
+                <a href="index.html">Home</a>
                 <a href="deals.html">Deals</a>
                 <a href="store.html">Stores</a>
                 <a href="rewards.html">Rewards</a>
+                <a href="compare.html" class="active">Compare</a>
+                <a href="tracker.html">Price Drop Alerts</a>
+                <a href="coupons.html">Coupons</a>
                 <a href="faq.html">FAQ</a>
             </div>
             <div class="nav-actions">
@@ -101,7 +105,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
 
             <div class="glass-panel p-6 rounded-xl border-t-4 border-t-blue-500 relative flex flex-col h-[800px]"
-                style="background-color: #111827; border-color: #374151;">
                 style="background-color: #111827; border-color: #374151;">
                 <div
                     class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase shadow">
@@ -145,14 +148,15 @@
                 </div>
             </div>
 
-            <div class="glass-panel p-6 rounded-xl border-t-4 border-t-blue-500 relative flex flex-col h-[800px]">
+            <div class="glass-panel p-6 rounded-xl border-t-4 border-t-blue-500 relative flex flex-col h-[800px]"
+                style="background-color: #111827; border-color: #374151;">
                 <div
                     class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase shadow">
                     Product 2</div>
 
                 <div class="flex mt-4 mb-6 shrink-0">
                     <input type="text" id="link-2"
-                        class="flex-1 border rounded-l px-4 py-3 outline-none focus:border-blue-500 bg-gray-50 text-sm"
+                        class="flex-1 border rounded-l px-4 py-3 outline-none focus:border-blue-500 bg-gray-800 text-white text-sm"
                         placeholder="Paste link...">
                     <button id="btn-2"
                         class="bg-gray-800 text-white font-bold px-4 rounded-r hover:bg-gray-700 transition">Load</button>
@@ -202,7 +206,17 @@
 
         async function loadProduct(productNumber) {
             let linkInput = document.getElementById(`link-${productNumber}`).value.trim();
-            if (!linkInput) { alert("Please paste a shopping link first!"); return; }
+            const urlLower = linkInput.toLowerCase();
+            const isValidStore = urlLower.includes("amazon") || urlLower.includes("flipkart") ||
+                urlLower.includes("myntra") || urlLower.includes("meesho") ||
+                urlLower.includes("ajio") || urlLower.includes("nykaa") ||
+                urlLower.includes("snapdeal") || urlLower.includes("tatacliq") ||
+                urlLower.includes("jiomart") || urlLower.includes("bigbasket");
+
+            if (!linkInput || !isValidStore) {
+                alert("Please paste a valid link from our Top 10 supported stores!");
+                return;
+            }
 
             // 🛠️ AUTO-FIX: If the user forgets 'https://', this adds it automatically so the robot doesn't crash!
             if (!linkInput.startsWith('http://') && !linkInput.startsWith('https://')) {

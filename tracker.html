@@ -265,7 +265,17 @@
                 const url = urlInput.value;
                 const statusMsg = document.getElementById('status-msg');
 
-                if (!url) { alert("Please paste a product link first!"); return; }
+                const urlLower = url.trim().toLowerCase();
+                const isValidStore = urlLower.includes("amazon") || urlLower.includes("flipkart") ||
+                    urlLower.includes("myntra") || urlLower.includes("meesho") ||
+                    urlLower.includes("ajio") || urlLower.includes("nykaa") ||
+                    urlLower.includes("snapdeal") || urlLower.includes("tatacliq") ||
+                    urlLower.includes("jiomart") || urlLower.includes("bigbasket");
+
+                if (!url || !isValidStore) {
+                    alert("Please paste a valid link from our Top 10 supported stores!");
+                    return;
+                }
                 if (!currentUser) return;
 
                 trackBtn.textContent = "Saving to Vault...";

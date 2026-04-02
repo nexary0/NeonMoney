@@ -1184,15 +1184,21 @@
   </script>
   <script>
     function forceSearch() {
-      // Grab the link using the brand new ID
       const pastedLink = document.getElementById('neonSearchBar').value.trim();
+      const urlLower = pastedLink.toLowerCase();
 
-      if (pastedLink === "") {
-        alert("The box is empty! Please paste a link.");
+      // Check if the link contains ANY of your top 10 stores
+      const isValidStore = urlLower.includes("amazon") || urlLower.includes("flipkart") ||
+        urlLower.includes("myntra") || urlLower.includes("meesho") ||
+        urlLower.includes("ajio") || urlLower.includes("nykaa") ||
+        urlLower.includes("snapdeal") || urlLower.includes("tatacliq") ||
+        urlLower.includes("jiomart") || urlLower.includes("bigbasket");
+
+      if (!pastedLink || !isValidStore) {
+        alert("Please paste a valid link from Amazon, Flipkart, Myntra, Meesho, Ajio, Nykaa, Snapdeal, Tata CLiQ, JioMart, or BigBasket!");
         return;
       }
 
-      // Force the redirect, bypassing all old rules
       window.location.href = "analysis.html?url=" + encodeURIComponent(pastedLink);
     }
   </script>
