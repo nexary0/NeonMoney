@@ -260,7 +260,10 @@ p {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 18px;
+    /* Increased from 4px to give links breathing room */
+    flex-wrap: wrap;
+    /* Allows links to wrap slightly if the screen is too small */
 }
 
 .nav-links a {
@@ -269,9 +272,11 @@ p {
     font-weight: 500;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 8px 14px;
+    padding: 6px 10px;
     border-radius: var(--radius-sm);
     transition: var(--transition);
+    white-space: nowrap;
+    /* Stops words like "Price Drop" from splitting in half */
 }
 
 .nav-links a:hover {
