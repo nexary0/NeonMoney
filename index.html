@@ -1170,16 +1170,6 @@
       setTimeout(typeWriterEffect, 1000);
 
       // Make the new search button actually work and redirect to analysis.html
-      var heroBtn = document.getElementById('hero-analyze-btn');
-      function goHero() {
-        var url = heroInput ? heroInput.value.trim() : '';
-        if (!url) { alert('Please paste an Amazon or Flipkart link first!'); return; }
-        heroBtn.textContent = 'Analyzing... ⚙';
-        heroBtn.disabled = true;
-        window.location.href = 'analysis.html?url=' + encodeURIComponent(url);
-      }
-      if (heroBtn) heroBtn.addEventListener('click', goHero);
-      if (heroInput) heroInput.addEventListener('keypress', function (e) { if (e.key === 'Enter') goHero(); });
     });
   </script>
   <script>
