@@ -1284,25 +1284,40 @@
     });
   </script>
   <style>
+    /* --- 1. KILL THE UGLY SCROLLING LINE --- */
+    .scrolling-ticker {
+      display: none !important;
+    }
+
+    /* --- 2. DESKTOP VIEW (Stays exactly the same as before) --- */
+    .force-stack-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .force-stack-reviews {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* --- 3. MOBILE VIEW (Forces Vertical Stacking) --- */
     @media (max-width: 768px) {
 
-      /* This grabs the exact boxes you tagged and forces them top-to-bottom */
-      .force-vertical {
-        display: flex !important;
-        flex-direction: column !important;
-        /* FORCES VERTICAL LAYOUT */
-        align-items: center !important;
+      .force-stack-stats,
+      .force-stack-reviews {
+        grid-template-columns: 1fr !important;
+        /* 1 vertical column */
         width: 100% !important;
-        gap: 24px !important;
+        padding: 0 16px;
+        /* Keeps them from touching the screen edges */
       }
 
-      /* This forces the inside cards to take up the full screen width */
-      .force-vertical>div {
+      /* Ensures cards take full width of the phone */
+      .force-stack-reviews>div,
+      .force-stack-stats>div {
         width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
-        box-sizing: border-box !important;
-        margin: 0 !important;
       }
     }
   </style>
