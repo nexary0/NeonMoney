@@ -4,7 +4,7 @@
 <head>
   <meta name="google-site-verification" content="bJb89nECFPIp40_IYAy-Up1r7DOMBlDSMGLVQT8Q098" />
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>NeonMoney | Compare Amazon vs Flipkart Prices & Earn Rewards</title>
   <meta name="description"
     content="Stop overpaying online! Compare live prices between Amazon and Flipkart, find the lowest price online, and earn coins to redeem for free gift cards in India.">
@@ -755,6 +755,22 @@
     </div>
   </nav>
 
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="close-menu" id="close-menu">&times;</span>
+    </div>
+    <div class="mobile-menu-links">
+      <a href="index.html">Home</a>
+      <a href="deals.html">Deals</a>
+      <a href="stores.html">Stores</a>
+      <a href="rewards.html">Rewards</a>
+      <a href="faq.html">FAQ</a>
+      <a href="compare.html">Compare Prices</a>
+      <a href="tracker.html">Price Drop Alerts</a>
+      <a href="coupons.html">Coupons</a>
+    </div>
+  </div>
+
   <div class="scrolling-ticker">
     <div class="ticker-content">
       <span class="ticker-item">✨ Track genuine price drops</span><span class="ticker-dot">•</span>
@@ -768,8 +784,9 @@
     </div>
   </div>
 
-  <section class="hero" <section class="hero" <section class="hero"
-    style="padding: 30px 20px 60px 20px !important; margin-top: 0px !important; min-height: 0px !important; height: auto !important; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+  <section class="hero">
+    style="padding: 30px 20px 60px 20px !important; margin-top: 0px !important; min-height: 0px !important; height: auto
+    !important; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
 
     <div
       style="color: #fb923c; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; background: rgba(255, 146, 60, 0.1); padding: 6px 14px; border-radius: 50px;">
@@ -1263,6 +1280,26 @@
 
     // Start the animation
     setTimeout(typeEffect, 1000);
+  </script>
+  <script>
+    // Make the Hamburger and Close buttons work
+    document.addEventListener('DOMContentLoaded', function () {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeMenu = document.getElementById('close-menu');
+
+      if (hamburger && mobileMenu && closeMenu) {
+        // Open menu
+        hamburger.addEventListener('click', function () {
+          mobileMenu.classList.add('active');
+        });
+
+        // Close menu
+        closeMenu.addEventListener('click', function () {
+          mobileMenu.classList.remove('active');
+        });
+      }
+    });
   </script>
 </body>
 

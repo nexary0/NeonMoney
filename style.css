@@ -1192,3 +1192,92 @@ p {
     /* Centers the user avatars */
     margin-top: 0 !important;
 }
+
+/* --- MOBILE SIZING & TEXT FIXES --- */
+@media (max-width: 768px) {
+
+    /* 1. Make overall text smaller like a native mobile app */
+    body {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 14px !important;
+    }
+
+    .hero-title {
+        font-size: 2.2rem !important;
+    }
+
+    /* 2. Shrink your existing Search Bar to fit the screen */
+    #neonSearchBar {
+        padding: 12px 16px !important;
+        font-size: 13px !important;
+    }
+
+    /* 3. Shrink the Analyze button so it stays on one line */
+    #hero-analyze-btn {
+        padding: 10px 18px !important;
+        font-size: 13px !important;
+        white-space: nowrap !important;
+        /* Forces text to stay on one line */
+    }
+}
+
+/* --- MOBILE MENU SLIDE-OUT STYLES --- */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Hides the menu off the screen by default */
+    width: 260px;
+    /* Width of the menu box */
+    height: 100vh;
+    background: #0B1120;
+    /* Matches your dark theme */
+    z-index: 99999;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.6);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* This class gets added by JS to slide the menu in */
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.close-menu {
+    font-size: 40px;
+    color: #F8FAFC;
+    cursor: pointer;
+    line-height: 0.5;
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mobile-menu-links a {
+    font-family: var(--font-ui, sans-serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: #F8FAFC;
+    text-decoration: none;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-menu-links a:hover {
+    color: #10B981;
+    /* Your neon green color */
+}
