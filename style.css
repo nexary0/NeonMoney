@@ -1474,3 +1474,12 @@ p {
     background: none !important;
     opacity: 0 !important;
 }
+
+/* --- 100% KILL GLITCHY LEFT LINE --- */
+.bg-noise,
+[class*="noise"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+}
