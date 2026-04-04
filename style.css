@@ -1467,3 +1467,10 @@ p {
         margin-bottom: 0 !important;
     }
 }
+
+/* --- KILL UGLY LEFT BORDER GLITCH --- */
+.bg-noise {
+    display: none !important;
+    background: none !important;
+    opacity: 0 !important;
+}
