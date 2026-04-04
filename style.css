@@ -1281,3 +1281,42 @@ p {
     color: #10B981;
     /* Your neon green color */
 }
+
+/* --- FINAL MOBILE HEADER & LAYOUT FIXES --- */
+@media (max-width: 768px) {
+
+    /* 1. Stop the screen from sliding left/right and cutting off text */
+    body,
+    html {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+
+    /* 2. Center the Hero text properly */
+    .hero,
+    .hero-grid,
+    .hero-left {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    /* 3. Force the Login and Sign Up buttons to stay perfectly side-by-side */
+    #nav-auth-links {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    /* 4. Make the buttons slightly smaller so they fit next to the 3 lines */
+    .nav-actions .btn {
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+        white-space: nowrap !important;
+    }
+}
