@@ -906,8 +906,7 @@
 
   <section class="stats-section">
     <div class="container">
-      <div class="stats-bar animate-on-scroll"
-        style="display:grid!important; grid-template-columns:repeat(4,1fr)!important; gap:32px!important;">
+      <div class="stats-bar animate-on-scroll force-stack-stats">
         <div>
           <div class="stat-num" data-count="50000" data-suffix="+">50,000+</div>
           <div class="stat-label">Happy Users</div>
@@ -933,8 +932,7 @@
       <div class="section-label animate-on-scroll"><span class="section-tag">⭐ Real Reviews</span></div>
       <h2 class="section-title animate-on-scroll">People Are <span class="gradient-text">Loving It</span></h2>
       <p class="section-sub animate-on-scroll">Real users, real savings. Here's what they're saying.</p>
-      <div class="reviews-grid"
-        style="display:grid!important; grid-template-columns:repeat(3,1fr)!important; gap:20px!important;">
+      <div class="reviews-grid animate-on-scroll force-stack-reviews">
         <div class="review-card animate-on-scroll delay-1">
           <div class="review-stars"> ★★★★★ </div>
           <p class="review-text">"I saved ₹2,000 on my Sony headphones just by comparing prices here. The coin rewards
@@ -1286,48 +1284,25 @@
     });
   </script>
   <style>
-    /* 1. PUSH NAVBAR ITEMS TO THE EXTREME EDGES */
-    .navbar .nav-inner {
-      max-width: 100% !important;
-      width: 100% !important;
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-      justify-content: space-between !important;
-    }
-
     @media (max-width: 768px) {
 
-      /* 2. FORCE STATS AND REVIEWS TO BE 100% VERTICAL */
-      /* This grabs your 4-item stats row, your 3-item review row, and any flex boxes */
-      .grid-4,
-      .grid-3,
-      .grid-2,
-      section [style*="display: flex"],
-      .glass-card [style*="display: flex"] {
+      /* This grabs the exact boxes you tagged and forces them top-to-bottom */
+      .force-vertical {
         display: flex !important;
         flex-direction: column !important;
-        /* THIS FORCES VERTICAL STACKING */
+        /* FORCES VERTICAL LAYOUT */
         align-items: center !important;
         width: 100% !important;
-        gap: 30px !important;
+        gap: 24px !important;
       }
 
-      /* 3. MAKE CARDS FULL WIDTH SO THEY DON'T LOOK TINY */
-      .review-card,
-      .stat-card {
+      /* This forces the inside cards to take up the full screen width */
+      .force-vertical>div {
         width: 100% !important;
         max-width: 100% !important;
         min-width: 100% !important;
-        margin-bottom: 20px !important;
-      }
-
-      /* 4. PROTECT THE NAVBAR AND SEARCH BAR FROM STACKING */
-      .nav-inner,
-      .nav-actions,
-      .buyhatke-layout-search {
-        flex-direction: row !important;
-        /* Keeps these horizontal! */
-        gap: 12px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
       }
     }
   </style>
