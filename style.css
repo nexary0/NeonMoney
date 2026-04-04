@@ -1433,3 +1433,37 @@ p {
         box-sizing: border-box !important;
     }
 }
+
+/* --- THE ULTIMATE STACKING FIX FOR REVIEWS & STATS --- */
+@media (max-width: 768px) {
+
+    /* 1. Force ANY container inside your sections to stack vertically instead of side-by-side */
+    section div[style*="flex"],
+    section div[style*="grid"] {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: wrap !important;
+    }
+
+    /* 2. Force the inner cards (Reviews, 50,000+ Stats) to take 100% of the screen width */
+    section div[style*="flex"]>div,
+    section div[style*="grid"]>div {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        margin-bottom: 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 3. PROTECT THE SEARCH BAR: Stop it from being affected by the stacking rule above */
+    .buyhatke-layout-search {
+        flex-direction: row !important;
+    }
+
+    .buyhatke-layout-search input,
+    .buyhatke-layout-search button {
+        width: auto !important;
+        min-width: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
