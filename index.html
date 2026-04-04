@@ -1286,40 +1286,48 @@
     });
   </script>
   <style>
+    /* 1. PUSH NAVBAR ITEMS TO THE EXTREME EDGES */
+    .navbar .nav-inner {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      justify-content: space-between !important;
+    }
+
     @media (max-width: 768px) {
 
-      /* 1. Force the Reviews and Stats to stack vertically */
-      section div[style*="flex"],
-      section div[style*="grid"] {
+      /* 2. FORCE STATS AND REVIEWS TO BE 100% VERTICAL */
+      /* This grabs your 4-item stats row, your 3-item review row, and any flex boxes */
+      .grid-4,
+      .grid-3,
+      .grid-2,
+      section [style*="display: flex"],
+      .glass-card [style*="display: flex"] {
         display: flex !important;
         flex-direction: column !important;
+        /* THIS FORCES VERTICAL STACKING */
+        align-items: center !important;
         width: 100% !important;
-        gap: 20px !important;
+        gap: 30px !important;
       }
 
-      /* 2. Force the inner cards to take 100% of the screen width */
-      section div[style*="flex"]>div,
-      section div[style*="grid"]>div,
-      .review-card {
+      /* 3. MAKE CARDS FULL WIDTH SO THEY DON'T LOOK TINY */
+      .review-card,
+      .stat-card {
         width: 100% !important;
         max-width: 100% !important;
         min-width: 100% !important;
-        margin: 0 0 20px 0 !important;
-        box-sizing: border-box !important;
+        margin-bottom: 20px !important;
       }
 
-      /* 3. Keep your Search Bar and Nav safe from this rule */
-      .buyhatke-layout-search,
+      /* 4. PROTECT THE NAVBAR AND SEARCH BAR FROM STACKING */
       .nav-inner,
-      .nav-actions {
+      .nav-actions,
+      .buyhatke-layout-search {
         flex-direction: row !important;
-      }
-
-      .buyhatke-layout-search input,
-      .buyhatke-layout-search button {
-        width: auto !important;
-        min-width: 0 !important;
-        margin-bottom: 0 !important;
+        /* Keeps these horizontal! */
+        gap: 12px !important;
       }
     }
   </style>
