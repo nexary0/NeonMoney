@@ -78,6 +78,8 @@
 .dashboard-main {
     padding: 40px 32px;
     overflow-y: auto;
+    /* ADD THIS LINE RIGHT HERE: */
+    -webkit-overflow-scrolling: touch;
 }
 
 .dashboard-header {

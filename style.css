@@ -62,7 +62,12 @@ body {
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
+
+    /* These 3 lines fix the mobile scrolling */
     overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
     -webkit-font-smoothing: antialiased;
 }
 
@@ -260,23 +265,24 @@ p {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 18px;
-    /* Increased from 4px to give links breathing room */
-    flex-wrap: wrap;
-    /* Allows links to wrap slightly if the screen is too small */
+    gap: 12px;
+    /* Reduced gap to fit more links */
+    flex-wrap: nowrap;
+    /* Forces them to stay on one line */
 }
 
 .nav-links a {
     font-family: var(--font-ui);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    /* Slightly smaller text to fit all 8 links */
     font-weight: 500;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 6px 10px;
+    padding: 6px 8px;
+    /* Reduced padding */
     border-radius: var(--radius-sm);
     transition: var(--transition);
     white-space: nowrap;
-    /* Stops words like "Price Drop" from splitting in half */
 }
 
 .nav-links a:hover {
@@ -1024,6 +1030,23 @@ p {
     div[style*="padding: 80px"] {
         padding-top: 30px !important;
         margin-top: 0 !important;
+    }
+}
+
+/* --- MOBILE FIX FOR SQUISHED CARDS --- */
+@media (max-width: 768px) {
+
+    .hero-social-proof,
+    .review-card-container,
+    div[style*="display: flex"] {
+        flex-wrap: wrap !important;
+    }
+
+    .review-card,
+    .product-card {
+        width: 100% !important;
+        min-width: 100% !important;
+        margin-bottom: 16px;
     }
 }
 
