@@ -744,7 +744,6 @@
         <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
         <div id="nav-auth-links" style="display: flex; gap:8px;">
           <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
-          <a href="signup.html" class="btn btn-primary btn-sm">Sign Up Free</a>
         </div>
         <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
           <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
@@ -798,23 +797,9 @@
       <span style="color: #2dd4bf;">Online</span>
     </h1>
 
-    <div style="width: 100%; max-width: 650px; position: relative;">
-      <div
-        style="display: flex; align-items: center; background-color: #111827; border: 1px solid #374151; border-radius: 50px; padding: 6px 6px 6px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-
-        <div style="color: #9ca3af; font-size: 18px;">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-
-        <input type="text" id="neonSearchBar"
-          style="width: 100%; padding: 16px 16px; background: transparent; color: white; border: none; outline: none; font-size: 16px;"
-          placeholder="Paste a Flipkart / Amazon link or Search a Product">
-
-        <button id="hero-analyze-btn" onclick="forceSearch()"
-          style="background-color: #3b82f6; color: white; font-weight: 600; padding: 14px 28px; border-radius: 50px; border: none; cursor: pointer; white-space: nowrap; font-size: 16px; display: flex; align-items: center; gap: 8px; transition: background-color 0.3s;">
-          Analyze Link <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px;"></i>
-        </button>
-      </div>
+    <div class="buyhatke-layout-search">
+      <input type="text" id="neonSearchBar" placeholder="Paste a Flipkart / Amazon link or Search">
+      <button id="hero-analyze-btn" onclick="forceSearch()">Analyze Link</button>
     </div>
   </section>
 

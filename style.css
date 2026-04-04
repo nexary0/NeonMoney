@@ -1320,3 +1320,79 @@ p {
         white-space: nowrap !important;
     }
 }
+
+/* --- DESKTOP NAVBAR WIDE LAYOUT FIX --- */
+@media (min-width: 1024px) {
+    .nav-inner {
+        max-width: 100% !important;
+        /* Removes the invisible box limit */
+        padding: 0 40px !important;
+        /* Gives it nice breathing room from the actual screen edges */
+    }
+}
+
+/* --- FIX: SEARCH BAR INLINE & HAMBURGER CUT-OFF --- */
+
+/* 1. Make Search Bar look like Buyhatke (One Line Pill) */
+.buyhatke-layout-search {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 6px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.buyhatke-layout-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+    /* Prevents squishing */
+}
+
+.buyhatke-layout-search button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-weight: 600;
+    white-space: nowrap;
+    /* Forces button to NEVER drop to next line */
+    cursor: pointer;
+}
+
+/* 2. Fix Hamburger Menu Cut-off on Mobile */
+@media (max-width: 768px) {
+    .nav-inner {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        /* Pulls the 3 lines away from the edge */
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .nav-actions {
+        gap: 12px !important;
+        /* Adds space between Login and 3 lines */
+    }
+
+    /* Make search text slightly smaller on tiny phones so it fits */
+    .buyhatke-layout-search input {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    .buyhatke-layout-search button {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
