@@ -1285,6 +1285,44 @@
       }
     });
   </script>
+  <style>
+    @media (max-width: 768px) {
+
+      /* 1. Force the Reviews and Stats to stack vertically */
+      section div[style*="flex"],
+      section div[style*="grid"] {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 20px !important;
+      }
+
+      /* 2. Force the inner cards to take 100% of the screen width */
+      section div[style*="flex"]>div,
+      section div[style*="grid"]>div,
+      .review-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        margin: 0 0 20px 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      /* 3. Keep your Search Bar and Nav safe from this rule */
+      .buyhatke-layout-search,
+      .nav-inner,
+      .nav-actions {
+        flex-direction: row !important;
+      }
+
+      .buyhatke-layout-search input,
+      .buyhatke-layout-search button {
+        width: auto !important;
+        min-width: 0 !important;
+        margin-bottom: 0 !important;
+      }
+    }
+  </style>
 </body>
 
 </html>
