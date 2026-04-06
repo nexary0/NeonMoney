@@ -54,22 +54,57 @@
     </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-[#0B0F19] text-white">
 
-    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
-        <div class="container mx-auto px-4 flex items-center justify-between h-16">
-            <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-gray-800">
-                <i class="fa-solid fa-bolt text-yellow-500"></i> NeonMoney
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo"
+                style="display: flex; align-items:center; gap:8px; text-decoration:none;">
+                <img src="logo.png" alt="" style="height:36px; width:36px; border-radius:8px; object-fit:cover;">
+                <span
+                    style="color:#fff; font-weight:bold; font-size:1.4rem; font-family:var(--font-display, sans-serif);">Neon<span
+                        style="color:var(--neon-green);">Money</span></span>
             </a>
-            <div class="hidden md:flex gap-6 font-medium text-sm text-gray-600">
-                <a href="compare.html" class="hover:text-green-600">Compare Prices</a>
-                <a href="coupons.html" class="hover:text-green-600">Coupons</a>
-                <a href="alerts.html" class="text-green-600 font-bold">Price Drop Alerts</a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="deals.html">Deals</a>
+                <a href="store.html">Stores</a>
+                <a href="rewards.html">Rewards</a>
+                <a href="faq.html">FAQ</a>
+                <a href="compare.html">Compare Prices</a>
+                <a href="tracker.html">Price Drop Alerts</a>
+                <a href="coupons.html">Coupons</a>
             </div>
-            <a href="login.html"
-                class="bg-gray-800 text-white px-5 py-2 rounded font-medium text-sm hover:bg-gray-700">Login</a>
+            <div class="nav-actions">
+                <div class="nav-coins" id="nav-coins" style="display:none;">💰 <span id="nav-coins-val">0</span></div>
+                <div id="nav-auth-links" style="display: flex; gap:8px;">
+                    <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+                </div>
+                <div id="nav-user-menu" style="display:none; gap:8px; align-items:center;">
+                    <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                    <button class="btn btn-secondary btn-sm btn-logout">Logout</button>
+                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            </div>
         </div>
     </nav>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <span class="close-menu" id="close-menu">&times;</span>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html">Home</a>
+            <a href="deals.html">Deals</a>
+            <a href="stores.html">Stores</a>
+            <a href="rewards.html">Rewards</a>
+            <a href="faq.html">FAQ</a>
+            <a href="compare.html">Compare Prices</a>
+            <a href="tracker.html">Price Drop Alerts</a>
+            <a href="coupons.html">Coupons</a>
+        </div>
+    </div>
+
 
     <div class="container mx-auto px-4 py-10 max-w-7xl">
 
@@ -91,12 +126,12 @@
             <div class="glass-panel p-8 rounded-xl flex flex-col h-full bg-white shadow-lg lg:sticky lg:top-24">
 
                 <div class="h-64 w-full flex items-center justify-center mb-6 border rounded-lg p-4 bg-gray-50/50">
-                    <img id="main-product-image" src="PLACEHOLDER_PRODUCT_URL" alt="Main Product Image"
-                        class="max-h-full object-contain">
+                    <img id="main-product-image" src="" alt="Main Product Image"
+                        class="hidden max-h-full object-contain">
 
-                    <div id="image-placeholder" class="hidden text-center text-gray-300">
+                    <div id="image-placeholder" class="text-center text-gray-300">
                         <i class="fa-solid fa-mobile-screen-button text-9xl"></i>
-                        <p class="text-xs mt-3">Image not found</p>
+                        <p class="text-xs mt-3">Waiting for product...</p>
                     </div>
                 </div>
 
